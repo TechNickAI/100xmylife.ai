@@ -1,42 +1,79 @@
 # Client Examples
 
-## Ali, the flagship proof case
-Best framed as the clearest early signal that this can become a real business.
+These are framed as sanitized proof points for website strategy. They should be treated as directional signals, not final public case studies.
 
-### What happened
-- Ali became a paying Personal AI Infrastructure client
-- she adopted the system deeply and quickly
-- she used her agent heavily across real work
-- she expanded interest from one assistant into broader team and company workflows
+## Anchor client, the flagship proof case
+The clearest early proof point is a founder-level client who became deeply engaged with the system and expanded usage over time.
 
-### Strong proof lines from source material
-- reported life felt “close to 100x better”
-- became the number one power user in the fleet
-- wanted more skills, more workflows, and more team integration
-- pushed Nick toward commercialization and broader packaging
+What this example demonstrates:
 
-### What this proves
-- the right user can get very high value quickly
-- delegation skill matters more than pure technical sophistication
-- the offer can expand from personal assistance into company operations if trust is high
+- the service can become central to a client's daily workflow
+- value increases when the client is good at delegation
+- one successful deployment often expands into multiple agent roles and workflow layers
+- clients are not only paying for setup, they are paying for judgment, iteration, and access to what works next
 
-## Thomas, the organic utility case
-- used his instance independently for financial projections
-- loved it enough to become a meaningful proof point in Nick’s telling
-- validates that the system can produce value outside Nick’s direct hand-holding
+Signals from this case:
 
-## Gil, the anti-case that sharpens positioning
-- had an instance but barely used it
-- already had strong human support and less unhandled operational pain
-- helps explain who is **not** an ideal client
+- strong enthusiasm and repeated usage
+- movement from a single assistant toward multiple specialized agents
+- interest in applying the system to content, ops, scheduling, memory, and communications
+- willingness to pay premium pricing for high-touch support
 
-## Nicole, the strategic expansion case
-- not the strongest usage proof yet, but important strategically
-- represents the possibility of a process/operator counterpart for the business
-- useful for internal strategy and future positioning, less useful as public proof until outcomes are clearer
+## The non-replacement lesson
+Another important pattern is that AI does not instantly replace trusted human assistants.
 
-## How to present publicly
-- prioritize anonymized or lightly named stories only where appropriate
-- tell the before/after in operational language, not hype
-- use outcomes like reduced coordination drag, better follow-through, faster research, and increased clarity
-- avoid oversharing personal or sensitive context from private client work
+What it does better right now:
+
+- drafting
+- synthesis
+- memory support
+- monitoring
+- context aggregation
+- lightweight operations
+
+What still needs care:
+
+- judgment-heavy communications
+- high-stakes scheduling
+- socially nuanced edge cases
+- anything where trust and reputation matter a lot
+
+This actually strengthens the service story: the offer is not naive replacement, it is better leverage.
+
+## The “technology trauma” pattern
+Some clients are not looking for more AI chaos.
+They want relief.
+
+A strong deployment can:
+
+- reduce tool overwhelm
+- make the system feel supportive instead of brittle
+- create confidence that the AI is there to help, not to generate more work
+
+That emotional outcome matters and should influence the site's tone.
+
+## Team expansion pattern
+A recurring insight is that once a principal's personal system works, the next natural move is often:
+
+- a content agent
+- an operations / support agent
+- a research or workflow agent
+- a review / QA layer
+
+This creates a compelling product story:
+
+1. start with the principal
+2. prove value fast
+3. expand into a coordinated AI team
+
+## Good public-safe case-study angles
+If the site needs proof without oversharing, good angles include:
+
+- A founder who moved from fragmented AI experiments to a coherent operating system
+- A principal whose assistant layer expanded into specialized agents for content and operations
+- A client who experienced the system as reducing chaos and increasing follow-through
+- A deployment where human oversight made the difference between toy automation and something trusted
+
+## Important caution
+Any named public case study should be approved explicitly before publication.
+Until then, the website should rely on anonymized examples, generalized patterns, and carefully phrased proof points.
