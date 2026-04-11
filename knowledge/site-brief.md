@@ -45,6 +45,11 @@ Position this as:
 - a digital chief of staff, upgraded with AI
 - a white-glove AI operating system for a principal
 - premium leverage, not software theater
+- an entry point into **Nick's ecosystem** and the frontier of what actually works
+
+A big part of the sale is not just the system itself. It is access to **Nick's judgment, design taste, workflow architecture, and evolving AI ecosystem**. Clients are buying both the infrastructure and participation in a curated operating environment that keeps improving.
+
+The site should find a tasteful way to connect this offer to **TechNickAI.ai** as the broader identity / ecosystem layer around Nick.
 
 Do not position it as:
 
@@ -79,6 +84,7 @@ The strongest current story is:
 - Why not just use ChatGPT?
 - Why do I need a human in the loop?
 - Is this secure?
+- Why does this need to be part of Nick's ecosystem?
 - Will this replace my assistant?
 - Is this a tool, a service, or both?
 - How customized is it?
@@ -108,6 +114,7 @@ The strongest current story is:
 - Book an exploratory conversation
 - See if Personal AI Infrastructure is a fit
 - Build your AI operating system
+- Enter the TechNickAI ecosystem
 
 ## Tone
 The site should feel:

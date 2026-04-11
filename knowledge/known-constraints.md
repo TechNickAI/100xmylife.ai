@@ -31,6 +31,7 @@ Public language should emphasize:
 - memory and context
 - better prioritization and follow-through
 - premium support around real complexity
+- thoughtful treatment of security and privacy
 
 ## Trust constraints
 A core truth behind the product is that current AI can behave like a very smart but inconsistent intern.
@@ -42,6 +43,23 @@ Public translation:
 - AI moves fast
 - humans supervise what matters
 - reliability comes from the architecture, not blind trust
+- security and privacy are handled as design decisions, not afterthoughts
+
+## Security messaging guidance
+The site should address security directly enough to build trust, without making brittle promises.
+
+Good themes:
+
+- architecture choices depend on the sensitivity of the client workflow
+- approvals and review reduce risk on high-stakes actions
+- memory, channels, and integrations are configured intentionally rather than casually connected
+- discretion, boundaries, and judgment are part of the service
+
+Avoid:
+
+- blanket claims that everything is perfectly secure
+- compliance language you cannot fully substantiate
+- technical over-detail on the homepage
 
 ## Packaging constraints
 - pricing language should stay directional until final packaging is approved

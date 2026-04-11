@@ -67,6 +67,7 @@ Clients get more than output. They get:
 - context continuity
 - parallel execution
 - less friction moving from thought to action
+- access to a system shaped by Nick's broader ecosystem of agents, workflows, and operational patterns
 
 ## What this is not
 This is not:
@@ -99,3 +100,7 @@ It is:
 A good public-safe version of the promise is:
 
 **You get a personalized AI operating system, backed by real human judgment, that helps you think more clearly, move faster, and execute with the leverage of a team.**
+
+A stronger ecosystem-aware variation is:
+
+**You get a personalized AI operating system shaped by Nick Sullivan's evolving ecosystem of workflows, agents, and operational design, backed by real human judgment where it matters.**
