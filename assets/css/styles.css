@@ -525,9 +525,17 @@ section + section { border-top: 1px solid var(--rule-soft); }
 
 .oversight-inner {
   display: grid;
+  /* pullquote gets the wider left column; body gets the right.
+     eyebrow spans full width so it doesn't consume a grid cell
+     and accidentally displace the pullquote into the narrow column. */
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
+}
+
+.oversight-eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
 }
 
 .pullquote {
@@ -736,18 +744,6 @@ section + section { border-top: 1px solid var(--rule-soft); }
   color: var(--ink-faint);
   margin: 0;
   text-transform: uppercase;
-}
-
-/* Reveal animation (generic) --------------------------------------------- */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 700ms ease, transform 700ms cubic-bezier(0.2, 0.7, 0.1, 1);
-}
-
-[data-reveal].is-visible {
-  opacity: 1;
-  transform: none;
 }
 
 /* Reduced motion --------------------------------------------------------- */
