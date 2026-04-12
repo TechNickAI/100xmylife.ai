@@ -1,0 +1,1700 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Design Lab: The 100x Framework</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,200..900,0..100&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f3ebdd;
+        --paper-soft: #ece2d0;
+        --ink: #15130e;
+        --ink-dim: #4a4238;
+        --ink-faint: #8a7c6a;
+        --oxblood: #a83919;
+        --oxblood-deep: #7a2710;
+        --rule: rgba(21, 19, 14, 0.22);
+        --rule-soft: rgba(21, 19, 14, 0.1);
+        --display: "Fraunces", "Times New Roman", Georgia, serif;
+        --body: "Instrument Sans", -apple-system, system-ui, sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+        --page-gutter: clamp(1.25rem, 4vw, 3.5rem);
+        --page-max: 72rem;
+        --color-1x: #b8860b;
+        --color-10x: #a83919;
+        --color-100x: #5b2333;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        background: var(--paper);
+        color: var(--ink);
+      }
+      body {
+        font-family: var(--body);
+        font-size: 1.0625rem;
+        line-height: 1.55;
+        background:
+          radial-gradient(
+            1200px 800px at 85% -10%,
+            rgba(168, 57, 25, 0.05),
+            transparent 60%
+          ),
+          radial-gradient(
+            1400px 900px at -10% 20%,
+            rgba(21, 19, 14, 0.045),
+            transparent 55%
+          ),
+          var(--paper);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      .page {
+        max-width: var(--page-max);
+        margin: 0 auto;
+        padding: 0 var(--page-gutter);
+      }
+
+      /* ── Header ──────────────────────────────────────────────── */
+      .lab-header {
+        padding: 3rem 0 2rem;
+        border-bottom: 1px solid var(--rule);
+        margin-bottom: 4rem;
+      }
+      .back {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+      }
+      .back:hover {
+        color: var(--oxblood);
+      }
+      .lab-header h1 {
+        font-family: var(--display);
+        font-size: clamp(2.2rem, 5vw, 4rem);
+        font-weight: 300;
+        line-height: 1.1;
+        margin: 0 0 1rem;
+      }
+      .lab-header .subtitle {
+        font-size: 1.125rem;
+        color: var(--ink-dim);
+        max-width: 55ch;
+        margin: 0;
+      }
+      .lab-header .formula {
+        font-family: var(--mono);
+        font-size: 0.875rem;
+        color: var(--ink-faint);
+        margin-top: 1.25rem;
+        background: var(--paper-soft);
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+      }
+
+      /* ── Variant wrapper ─────────────────────────────────────── */
+      .variant {
+        margin-bottom: 6rem;
+        padding-bottom: 4rem;
+        border-bottom: 1px solid var(--rule-soft);
+      }
+      .variant:last-child {
+        border-bottom: none;
+      }
+      .variant-number {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        margin: 0 0 0.5rem;
+      }
+      .variant-name {
+        font-family: var(--display);
+        font-size: clamp(1.5rem, 3vw, 2.2rem);
+        font-weight: 350;
+        margin: 0 0 0.5rem;
+        line-height: 1.2;
+      }
+      .variant-desc {
+        color: var(--ink-dim);
+        max-width: 55ch;
+        margin: 0 0 2.5rem;
+        font-size: 0.9375rem;
+      }
+
+      /* ── Shared slider ───────────────────────────────────────── */
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 6px;
+        background: var(--paper-soft);
+        border-radius: 3px;
+        outline: none;
+        cursor: pointer;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--ink);
+        cursor: pointer;
+        border: 3px solid var(--paper);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        transition: transform 0.15s ease;
+      }
+      input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.15);
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--ink);
+        cursor: pointer;
+        border: 3px solid var(--paper);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      /* ── Result number ───────────────────────────────────────── */
+      .result-big {
+        font-family: var(--display);
+        font-weight: 300;
+        text-align: center;
+        transition: color 0.3s ease;
+      }
+      .result-label {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        text-align: center;
+        margin-top: 0.25rem;
+      }
+
+      /* ══════════════════════════════════════════════════════════ */
+      /* VARIANT 1: NARRATIVE SLIDERS                              */
+      /* ══════════════════════════════════════════════════════════ */
+      .v1-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .v1-card {
+        background: var(--paper-soft);
+        border-radius: 8px;
+        padding: 1.5rem;
+        border: 1px solid var(--rule-soft);
+        transition: border-color 0.3s ease;
+      }
+      .v1-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 0.75rem;
+      }
+      .v1-layer-name {
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .v1-pct {
+        font-family: var(--mono);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .v1-card-heading {
+        font-family: var(--display);
+        font-size: 1.25rem;
+        font-weight: 400;
+        margin: 0.75rem 0 0.5rem;
+        line-height: 1.25;
+        min-height: 2em;
+        transition: opacity 0.3s ease;
+      }
+      .v1-card-body {
+        font-size: 0.875rem;
+        color: var(--ink-dim);
+        line-height: 1.5;
+        min-height: 4.5em;
+        transition: opacity 0.3s ease;
+      }
+      .v1-card-slider {
+        margin-top: 1rem;
+      }
+      .v1-multiplier {
+        font-size: clamp(4rem, 10vw, 8rem);
+        line-height: 1;
+        padding: 2rem 0;
+      }
+      .v1-insight {
+        font-family: var(--body);
+        font-size: 0.9375rem;
+        color: var(--ink-dim);
+        text-align: center;
+        min-height: 1.5em;
+        max-width: 45ch;
+        margin: 0 auto;
+      }
+
+      /* ══════════════════════════════════════════════════════════ */
+      /* VARIANT 2: CONTENT RINGS                                  */
+      /* ══════════════════════════════════════════════════════════ */
+      .v2-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+      @media (max-width: 768px) {
+        .v2-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+      .v2-svg-wrap {
+        display: flex;
+        justify-content: center;
+      }
+      .v2-svg-wrap svg {
+        width: 100%;
+        max-width: 380px;
+        height: auto;
+      }
+      .v2-ring-label {
+        font-family: var(--mono);
+        font-size: 8px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .v2-center-text {
+        font-family: var(--display);
+        font-weight: 300;
+      }
+      .v2-panel {
+      }
+      .v2-layer-block {
+        margin-bottom: 1.5rem;
+      }
+      .v2-layer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 0.375rem;
+      }
+      .v2-layer-title {
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .v2-layer-pct {
+        font-family: var(--mono);
+        font-size: 0.875rem;
+      }
+      .v2-layer-indicators {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.375rem;
+        margin-top: 0.5rem;
+      }
+      .v2-indicator {
+        font-size: 0.75rem;
+        font-family: var(--mono);
+        padding: 0.25rem 0.625rem;
+        border-radius: 100px;
+        background: var(--paper);
+        border: 1px solid var(--rule-soft);
+        color: var(--ink-faint);
+        transition: all 0.3s ease;
+      }
+      .v2-indicator.active {
+        color: var(--ink);
+        border-color: var(--rule);
+        background: var(--paper-soft);
+      }
+
+      /* ══════════════════════════════════════════════════════════ */
+      /* VARIANT 3: THE JOURNEY                                    */
+      /* ══════════════════════════════════════════════════════════ */
+      .v3-chapters {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        position: relative;
+      }
+      @media (max-width: 768px) {
+        .v3-chapters {
+          grid-template-columns: 1fr;
+        }
+      }
+      .v3-chapter {
+        padding: 2rem 1.5rem;
+        position: relative;
+        border-right: 1px solid var(--rule-soft);
+        transition: background 0.3s ease;
+      }
+      .v3-chapter:last-child {
+        border-right: none;
+      }
+      @media (max-width: 768px) {
+        .v3-chapter {
+          border-right: none;
+          border-bottom: 1px solid var(--rule-soft);
+        }
+        .v3-chapter:last-child {
+          border-bottom: none;
+        }
+      }
+      .v3-chapter-eyebrow {
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 0 0 0.25rem;
+      }
+      .v3-chapter-heading {
+        font-family: var(--display);
+        font-size: 1.375rem;
+        font-weight: 400;
+        margin: 0 0 0.75rem;
+        line-height: 1.2;
+      }
+      .v3-slider-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .v3-slider-row input {
+        flex: 1;
+      }
+      .v3-slider-pct {
+        font-family: var(--mono);
+        font-size: 0.875rem;
+        min-width: 3.5ch;
+        text-align: right;
+      }
+      .v3-chapter-text {
+        font-size: 0.875rem;
+        color: var(--ink-dim);
+        line-height: 1.5;
+        min-height: 4em;
+        transition: opacity 0.3s ease;
+      }
+      .v3-chapter-felt {
+        font-family: var(--display);
+        font-style: italic;
+        font-size: 0.9375rem;
+        color: var(--ink-dim);
+        margin-top: 1rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--rule-soft);
+        min-height: 2em;
+        transition: opacity 0.3s ease;
+      }
+      .v3-running-total {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 0.5rem;
+        padding: 2.5rem 0 1rem;
+        font-family: var(--display);
+      }
+      .v3-total-number {
+        font-size: clamp(3rem, 8vw, 5rem);
+        font-weight: 300;
+        line-height: 1;
+        transition: color 0.3s ease;
+      }
+      .v3-total-eq {
+        font-family: var(--mono);
+        font-size: 0.8125rem;
+        color: var(--ink-faint);
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+
+      /* ══════════════════════════════════════════════════════════ */
+      /* VARIANT 4: THE DASHBOARD                                  */
+      /* ══════════════════════════════════════════════════════════ */
+      .v4-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .v4-stat-card {
+        background: var(--paper-soft);
+        border-radius: 8px;
+        padding: 1.5rem;
+        border: 1px solid var(--rule-soft);
+        text-align: center;
+      }
+      .v4-gauge-wrap {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 1rem;
+      }
+      .v4-gauge-wrap svg {
+        width: 100%;
+        height: 100%;
+      }
+      .v4-gauge-bg {
+        fill: none;
+        stroke: var(--paper);
+        stroke-width: 8;
+      }
+      .v4-gauge-fill {
+        fill: none;
+        stroke-width: 8;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 0.4s ease;
+      }
+      .v4-gauge-text {
+        font-family: var(--display);
+        font-weight: 300;
+        dominant-baseline: central;
+        text-anchor: middle;
+      }
+      .v4-stat-name {
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+      .v4-stat-tagline {
+        font-family: var(--display);
+        font-size: 1.0625rem;
+        font-weight: 400;
+        min-height: 1.5em;
+        margin-bottom: 0.75rem;
+      }
+      .v4-stat-slider {
+        margin-bottom: 1rem;
+      }
+      .v4-bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+      }
+      .v4-bullets li {
+        font-size: 0.8125rem;
+        padding: 0.3rem 0;
+        color: var(--ink-faint);
+        transition:
+          color 0.3s ease,
+          opacity 0.3s ease;
+        position: relative;
+        padding-left: 1rem;
+      }
+      .v4-bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.65rem;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--rule-soft);
+        transition: background 0.3s ease;
+      }
+      .v4-bullets li.active {
+        color: var(--ink);
+      }
+      .v4-bullets li.active::before {
+        background: currentColor;
+      }
+      .v4-output-box {
+        background: var(--paper-soft);
+        border-radius: 8px;
+        padding: 2rem;
+        border: 1px solid var(--rule-soft);
+        text-align: center;
+      }
+      .v4-output-number {
+        font-family: var(--display);
+        font-size: clamp(3rem, 8vw, 5rem);
+        font-weight: 300;
+        line-height: 1;
+        transition: color 0.3s ease;
+      }
+      .v4-output-narrative {
+        font-size: 0.9375rem;
+        color: var(--ink-dim);
+        max-width: 50ch;
+        margin: 1rem auto 0;
+        min-height: 3em;
+        transition: opacity 0.3s ease;
+      }
+
+      /* ══════════════════════════════════════════════════════════ */
+      /* VARIANT 5: THE STACK                                      */
+      /* ══════════════════════════════════════════════════════════ */
+      .v5-stack-container {
+        display: flex;
+        gap: 2rem;
+        align-items: stretch;
+      }
+      @media (max-width: 768px) {
+        .v5-stack-container {
+          flex-direction: column;
+        }
+      }
+      .v5-controls-col {
+        flex: 0 0 200px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      @media (max-width: 768px) {
+        .v5-controls-col {
+          flex-direction: row;
+          flex: none;
+        }
+        .v5-ctrl-block {
+          flex: 1;
+        }
+      }
+      .v5-ctrl-label {
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 0.375rem;
+      }
+      .v5-ctrl-pct {
+        font-family: var(--mono);
+        font-size: 0.875rem;
+        float: right;
+      }
+      .v5-stack-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-height: 480px;
+      }
+      @media (max-width: 768px) {
+        .v5-stack-col {
+          min-height: 400px;
+        }
+      }
+      .v5-band {
+        border-radius: 6px;
+        padding: 1.25rem 1.5rem;
+        overflow: hidden;
+        transition:
+          flex 0.5s ease,
+          opacity 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+      }
+      .v5-band-title {
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+        transition: opacity 0.3s ease;
+      }
+      .v5-band-heading {
+        font-family: var(--display);
+        font-size: 1.125rem;
+        font-weight: 400;
+        margin: 0 0 0.375rem;
+        line-height: 1.2;
+        transition: opacity 0.3s ease;
+      }
+      .v5-band-text {
+        font-size: 0.8125rem;
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.4;
+        transition: opacity 0.3s ease;
+      }
+      .v5-band.compressed .v5-band-heading,
+      .v5-band.compressed .v5-band-text {
+        opacity: 0;
+      }
+      .v5-total-row {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 0.5rem;
+        padding: 2rem 0;
+      }
+      .v5-total-num {
+        font-family: var(--display);
+        font-size: clamp(3rem, 8vw, 5rem);
+        font-weight: 300;
+        line-height: 1;
+        transition: color 0.3s ease;
+      }
+
+      /* ── Footer ──────────────────────────────────────────────── */
+      .lab-footer {
+        padding: 3rem 0;
+        border-top: 1px solid var(--rule-soft);
+        margin-top: 2rem;
+        text-align: center;
+      }
+      .lab-footer p {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--ink-faint);
+        letter-spacing: 0.04em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="lab-header">
+        <a class="back" href="/">← 100xmylife.ai</a>
+        <h1>The 100× Framework</h1>
+        <p class="subtitle">
+          100× is a bold claim. We know. These three layers magnify the
+          entrepreneur, and they compound. A weak foundation caps everything
+          above it. The full arc takes years. That is the point.
+        </p>
+        <p class="formula">
+          efficiency × capacity × creativity = your multiplier
+        </p>
+      </header>
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- VARIANT 1: NARRATIVE SLIDERS                               -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <section class="variant" id="v1">
+        <p class="variant-number">Variant 01 / 05</p>
+        <h2 class="variant-name">Narrative Sliders</h2>
+        <p class="variant-desc">
+          Each layer tells its own story. The text shifts as you drag, showing
+          what life looks like at every level.
+        </p>
+
+        <div class="v1-cards" id="v1-cards">
+          <div class="v1-card" data-layer="a">
+            <div class="v1-card-header">
+              <span class="v1-layer-name" style="color: var(--color-1x)"
+                >1× Efficiency</span
+              >
+              <span class="v1-pct" style="color: var(--color-1x)">100%</span>
+            </div>
+            <div class="v1-card-slider">
+              <input type="range" min="0" max="100" value="100" />
+            </div>
+            <h3 class="v1-card-heading"></h3>
+            <p class="v1-card-body"></p>
+          </div>
+          <div class="v1-card" data-layer="b">
+            <div class="v1-card-header">
+              <span class="v1-layer-name" style="color: var(--color-10x)"
+                >10× Capacity</span
+              >
+              <span class="v1-pct" style="color: var(--color-10x)">100%</span>
+            </div>
+            <div class="v1-card-slider">
+              <input type="range" min="0" max="100" value="100" />
+            </div>
+            <h3 class="v1-card-heading"></h3>
+            <p class="v1-card-body"></p>
+          </div>
+          <div class="v1-card" data-layer="c">
+            <div class="v1-card-header">
+              <span class="v1-layer-name" style="color: var(--color-100x)"
+                >100× Creativity</span
+              >
+              <span class="v1-pct" style="color: var(--color-100x)">100%</span>
+            </div>
+            <div class="v1-card-slider">
+              <input type="range" min="0" max="100" value="100" />
+            </div>
+            <h3 class="v1-card-heading"></h3>
+            <p class="v1-card-body"></p>
+          </div>
+        </div>
+        <div class="result-big v1-multiplier" id="v1-result">100×</div>
+        <p class="v1-insight" id="v1-insight"></p>
+        <p class="result-label">your multiplier</p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- VARIANT 2: CONTENT RINGS                                   -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <section class="variant" id="v2">
+        <p class="variant-number">Variant 02 / 05</p>
+        <h2 class="variant-name">Content Rings</h2>
+        <p class="variant-desc">
+          Each ring represents a layer. As it fills, the capabilities it unlocks
+          light up. Inner rings constrain outer rings.
+        </p>
+
+        <div class="v2-layout">
+          <div class="v2-svg-wrap">
+            <svg viewBox="0 0 400 400" id="v2-svg">
+              <circle
+                cx="200"
+                cy="200"
+                r="175"
+                fill="none"
+                stroke="var(--paper-soft)"
+                stroke-width="30"
+              />
+              <circle
+                cx="200"
+                cy="200"
+                r="135"
+                fill="none"
+                stroke="var(--paper-soft)"
+                stroke-width="30"
+              />
+              <circle
+                cx="200"
+                cy="200"
+                r="95"
+                fill="none"
+                stroke="var(--paper-soft)"
+                stroke-width="30"
+              />
+              <circle
+                id="v2-ring-c"
+                cx="200"
+                cy="200"
+                r="175"
+                fill="none"
+                stroke="var(--color-100x)"
+                stroke-width="30"
+                stroke-dasharray="1099.56 1099.56"
+                stroke-dashoffset="0"
+                stroke-linecap="round"
+                transform="rotate(-90 200 200)"
+                opacity="0.65"
+              />
+              <circle
+                id="v2-ring-b"
+                cx="200"
+                cy="200"
+                r="135"
+                fill="none"
+                stroke="var(--color-10x)"
+                stroke-width="30"
+                stroke-dasharray="848.23 848.23"
+                stroke-dashoffset="0"
+                stroke-linecap="round"
+                transform="rotate(-90 200 200)"
+                opacity="0.75"
+              />
+              <circle
+                id="v2-ring-a"
+                cx="200"
+                cy="200"
+                r="95"
+                fill="none"
+                stroke="var(--color-1x)"
+                stroke-width="30"
+                stroke-dasharray="596.90 596.90"
+                stroke-dashoffset="0"
+                stroke-linecap="round"
+                transform="rotate(-90 200 200)"
+                opacity="0.85"
+              />
+              <text
+                x="200"
+                y="30"
+                class="v2-ring-label"
+                fill="var(--color-100x)"
+                text-anchor="middle"
+              >
+                creativity
+              </text>
+              <text
+                x="200"
+                y="72"
+                class="v2-ring-label"
+                fill="var(--color-10x)"
+                text-anchor="middle"
+              >
+                capacity
+              </text>
+              <text
+                x="200"
+                y="112"
+                class="v2-ring-label"
+                fill="var(--color-1x)"
+                text-anchor="middle"
+              >
+                efficiency
+              </text>
+              <text
+                id="v2-center"
+                x="200"
+                y="200"
+                class="v2-center-text"
+                font-size="44"
+                fill="var(--ink)"
+                text-anchor="middle"
+                dominant-baseline="central"
+              >
+                100×
+              </text>
+            </svg>
+          </div>
+          <div class="v2-panel">
+            <div class="v2-layer-block" data-layer="a">
+              <div class="v2-layer-header">
+                <span class="v2-layer-title" style="color: var(--color-1x)"
+                  >1× Efficiency</span
+                >
+                <span class="v2-layer-pct">100%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                style="width: 100%"
+              />
+              <div class="v2-layer-indicators">
+                <span class="v2-indicator active" data-thresh="20">memory</span>
+                <span class="v2-indicator active" data-thresh="40"
+                  >context</span
+                >
+                <span class="v2-indicator active" data-thresh="60"
+                  >prioritization</span
+                >
+                <span class="v2-indicator active" data-thresh="80">focus</span>
+                <span class="v2-indicator active" data-thresh="95"
+                  >clarity</span
+                >
+              </div>
+            </div>
+            <div class="v2-layer-block" data-layer="b">
+              <div class="v2-layer-header">
+                <span class="v2-layer-title" style="color: var(--color-10x)"
+                  >10× Capacity</span
+                >
+                <span class="v2-layer-pct">100%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                style="width: 100%"
+              />
+              <div class="v2-layer-indicators">
+                <span class="v2-indicator active" data-thresh="20"
+                  >research agents</span
+                >
+                <span class="v2-indicator active" data-thresh="40"
+                  >parallel work</span
+                >
+                <span class="v2-indicator active" data-thresh="60"
+                  >integrations</span
+                >
+                <span class="v2-indicator active" data-thresh="80"
+                  >delegation</span
+                >
+                <span class="v2-indicator active" data-thresh="95"
+                  >full team</span
+                >
+              </div>
+            </div>
+            <div class="v2-layer-block" data-layer="c">
+              <div class="v2-layer-header">
+                <span class="v2-layer-title" style="color: var(--color-100x)"
+                  >100× Creativity</span
+                >
+                <span class="v2-layer-pct">100%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                style="width: 100%"
+              />
+              <div class="v2-layer-indicators">
+                <span class="v2-indicator active" data-thresh="20"
+                  >rapid prototyping</span
+                >
+                <span class="v2-indicator active" data-thresh="40"
+                  >overnight drafts</span
+                >
+                <span class="v2-indicator active" data-thresh="60"
+                  >idea → options</span
+                >
+                <span class="v2-indicator active" data-thresh="80"
+                  >speed of thought</span
+                >
+                <span class="v2-indicator active" data-thresh="95"
+                  >execution partner</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- VARIANT 3: THE JOURNEY                                     -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <section class="variant" id="v3">
+        <p class="variant-number">Variant 03 / 05</p>
+        <h2 class="variant-name">The Journey</h2>
+        <p class="variant-desc">
+          Three chapters, read left to right. Each builds on the last. The
+          running total shows how they compound.
+        </p>
+
+        <div class="v3-chapters" id="v3-chapters">
+          <div class="v3-chapter" data-layer="a">
+            <p class="v3-chapter-eyebrow" style="color: var(--color-1x)">
+              Chapter 1
+            </p>
+            <h3 class="v3-chapter-heading">Efficiency</h3>
+            <div class="v3-slider-row">
+              <input type="range" min="0" max="100" value="100" />
+              <span class="v3-slider-pct">100%</span>
+            </div>
+            <p class="v3-chapter-text"></p>
+            <p class="v3-chapter-felt"></p>
+          </div>
+          <div class="v3-chapter" data-layer="b">
+            <p class="v3-chapter-eyebrow" style="color: var(--color-10x)">
+              Chapter 2
+            </p>
+            <h3 class="v3-chapter-heading">Capacity</h3>
+            <div class="v3-slider-row">
+              <input type="range" min="0" max="100" value="100" />
+              <span class="v3-slider-pct">100%</span>
+            </div>
+            <p class="v3-chapter-text"></p>
+            <p class="v3-chapter-felt"></p>
+          </div>
+          <div class="v3-chapter" data-layer="c">
+            <p class="v3-chapter-eyebrow" style="color: var(--color-100x)">
+              Chapter 3
+            </p>
+            <h3 class="v3-chapter-heading">Creativity</h3>
+            <div class="v3-slider-row">
+              <input type="range" min="0" max="100" value="100" />
+              <span class="v3-slider-pct">100%</span>
+            </div>
+            <p class="v3-chapter-text"></p>
+            <p class="v3-chapter-felt"></p>
+          </div>
+        </div>
+        <div class="v3-running-total">
+          <span class="v3-total-number" id="v3-result">100×</span>
+          <span class="v3-total-eq">
+            <span id="v3-eq-a">100</span>% × <span id="v3-eq-b">100</span>% ×
+            <span id="v3-eq-c">100</span>%
+          </span>
+        </div>
+        <p class="result-label">your multiplier</p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- VARIANT 4: THE DASHBOARD                                   -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <section class="variant" id="v4">
+        <p class="variant-number">Variant 04 / 05</p>
+        <h2 class="variant-name">The Dashboard</h2>
+        <p class="variant-desc">
+          Three stat cards, each with a gauge and the capabilities it unlocks.
+          Below: what your week looks like at current settings.
+        </p>
+
+        <div class="v4-stats" id="v4-stats">
+          <div class="v4-stat-card" data-layer="a">
+            <div class="v4-gauge-wrap">
+              <svg viewBox="0 0 120 120">
+                <circle class="v4-gauge-bg" cx="60" cy="60" r="50" />
+                <circle
+                  class="v4-gauge-fill"
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  stroke="var(--color-1x)"
+                  stroke-dasharray="314.16"
+                  stroke-dashoffset="0"
+                  transform="rotate(-90 60 60)"
+                  stroke-linecap="round"
+                />
+                <text
+                  class="v4-gauge-text"
+                  x="60"
+                  y="60"
+                  font-size="22"
+                  fill="var(--ink)"
+                >
+                  100%
+                </text>
+              </svg>
+            </div>
+            <p class="v4-stat-name" style="color: var(--color-1x)">
+              Efficiency
+            </p>
+            <p class="v4-stat-tagline">Reach your own hundred percent</p>
+            <div class="v4-stat-slider">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                style="width: 100%"
+              />
+            </div>
+            <ul class="v4-bullets">
+              <li class="active" data-thresh="15">
+                Context has a reliable home
+              </li>
+              <li class="active" data-thresh="35">
+                Biggest domino is always visible
+              </li>
+              <li class="active" data-thresh="55">Cognitive load drops</li>
+              <li class="active" data-thresh="75">Stop dropping things</li>
+              <li class="active" data-thresh="90">Full creative capacity</li>
+            </ul>
+          </div>
+          <div class="v4-stat-card" data-layer="b">
+            <div class="v4-gauge-wrap">
+              <svg viewBox="0 0 120 120">
+                <circle class="v4-gauge-bg" cx="60" cy="60" r="50" />
+                <circle
+                  class="v4-gauge-fill"
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  stroke="var(--color-10x)"
+                  stroke-dasharray="314.16"
+                  stroke-dashoffset="0"
+                  transform="rotate(-90 60 60)"
+                  stroke-linecap="round"
+                />
+                <text
+                  class="v4-gauge-text"
+                  x="60"
+                  y="60"
+                  font-size="22"
+                  fill="var(--ink)"
+                >
+                  100%
+                </text>
+              </svg>
+            </div>
+            <p class="v4-stat-name" style="color: var(--color-10x)">Capacity</p>
+            <p class="v4-stat-tagline">One person becomes a team</p>
+            <div class="v4-stat-slider">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                style="width: 100%"
+              />
+            </div>
+            <ul class="v4-bullets">
+              <li class="active" data-thresh="15">
+                Research agents investigating
+              </li>
+              <li class="active" data-thresh="35">
+                Scheduled work in background
+              </li>
+              <li class="active" data-thresh="55">
+                Integrations across real tools
+              </li>
+              <li class="active" data-thresh="75">Delegation actually works</li>
+              <li class="active" data-thresh="90">Full parallel execution</li>
+            </ul>
+          </div>
+          <div class="v4-stat-card" data-layer="c">
+            <div class="v4-gauge-wrap">
+              <svg viewBox="0 0 120 120">
+                <circle class="v4-gauge-bg" cx="60" cy="60" r="50" />
+                <circle
+                  class="v4-gauge-fill"
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  stroke="var(--color-100x)"
+                  stroke-dasharray="314.16"
+                  stroke-dashoffset="0"
+                  transform="rotate(-90 60 60)"
+                  stroke-linecap="round"
+                />
+                <text
+                  class="v4-gauge-text"
+                  x="60"
+                  y="60"
+                  font-size="22"
+                  fill="var(--ink)"
+                >
+                  100%
+                </text>
+              </svg>
+            </div>
+            <p class="v4-stat-name" style="color: var(--color-100x)">
+              Creativity
+            </p>
+            <p class="v4-stat-tagline">Idea to execution, speed of thought</p>
+            <div class="v4-stat-slider">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                style="width: 100%"
+              />
+            </div>
+            <ul class="v4-bullets">
+              <li class="active" data-thresh="15">Rapid prototyping</li>
+              <li class="active" data-thresh="35">
+                Overnight drafts and research
+              </li>
+              <li class="active" data-thresh="55">
+                Concrete options from rough ideas
+              </li>
+              <li class="active" data-thresh="75">
+                One-line instruction → shipped artifact
+              </li>
+              <li class="active" data-thresh="90">Execution partnership</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="v4-output-box">
+          <div class="v4-output-number" id="v4-result">100×</div>
+          <p class="result-label">your multiplier</p>
+          <p class="v4-output-narrative" id="v4-narrative"></p>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- VARIANT 5: THE STACK                                       -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <section class="variant" id="v5">
+        <p class="variant-number">Variant 05 / 05</p>
+        <h2 class="variant-name">The Stack</h2>
+        <p class="variant-desc">
+          Three bands, stacked. Each contains its content. When a layer is weak,
+          the band compresses and the content literally disappears.
+        </p>
+
+        <div class="v5-stack-container">
+          <div class="v5-controls-col">
+            <div class="v5-ctrl-block">
+              <div>
+                <span class="v5-ctrl-label" style="color: var(--color-1x)"
+                  >Efficiency</span
+                ><span class="v5-ctrl-pct" id="v5-pct-a">100%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                data-layer="a"
+                style="width: 100%"
+              />
+            </div>
+            <div class="v5-ctrl-block">
+              <div>
+                <span class="v5-ctrl-label" style="color: var(--color-10x)"
+                  >Capacity</span
+                ><span class="v5-ctrl-pct" id="v5-pct-b">100%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                data-layer="b"
+                style="width: 100%"
+              />
+            </div>
+            <div class="v5-ctrl-block">
+              <div>
+                <span class="v5-ctrl-label" style="color: var(--color-100x)"
+                  >Creativity</span
+                ><span class="v5-ctrl-pct" id="v5-pct-c">100%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                data-layer="c"
+                style="width: 100%"
+              />
+            </div>
+          </div>
+
+          <div class="v5-stack-col" id="v5-stack">
+            <div
+              class="v5-band"
+              data-band="a"
+              style="flex: 100; background: var(--color-1x); color: #fff"
+            >
+              <span class="v5-band-title">1× Efficiency</span>
+              <h3 class="v5-band-heading">Reach your own hundred percent</h3>
+              <p class="v5-band-text">
+                Memory, context, ruthless prioritization. Cognitive load
+                offloaded. You stop dropping things, stop repeating yourself,
+                start showing up at full capacity.
+              </p>
+            </div>
+            <div
+              class="v5-band"
+              data-band="b"
+              style="flex: 100; background: var(--color-10x); color: #fff"
+            >
+              <span class="v5-band-title">10× Capacity</span>
+              <h3 class="v5-band-heading">One person becomes a team</h3>
+              <p class="v5-band-text">
+                Specialized agents for research, writing, operations. Scheduled
+                work runs in the background. What used to cost a calendar now
+                costs a prompt.
+              </p>
+            </div>
+            <div
+              class="v5-band"
+              data-band="c"
+              style="flex: 100; background: var(--color-100x); color: #fff"
+            >
+              <span class="v5-band-title">100× Creativity</span>
+              <h3 class="v5-band-heading">
+                Idea to execution, speed of thought
+              </h3>
+              <p class="v5-band-text">
+                The system does the legwork while you sleep. You wake to drafts
+                waiting, research briefed, decisions teed up. The constraint is
+                no longer bandwidth. It is taste.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="v5-total-row">
+          <span class="v5-total-num" id="v5-result">100×</span>
+          <span class="result-label" style="text-align: left; margin-top: 0"
+            >your multiplier</span
+          >
+        </div>
+      </section>
+
+      <footer class="lab-footer">
+        <p>100xmylife.ai design lab · internal use</p>
+      </footer>
+    </div>
+
+    <script>
+      // ── Math ──────────────────────────────────────────────────
+      function calc(a, b, c) {
+        return (a / 100) * (b / 100) * (c / 100) * 100;
+      }
+      function fmt(v) {
+        if (v === 0) return "0×";
+        if (v >= 10) return Math.round(v) + "×";
+        if (v >= 1) return v.toFixed(1) + "×";
+        return v.toFixed(2) + "×";
+      }
+      function rcolor(v) {
+        if (v >= 80) return "var(--ink)";
+        if (v >= 40) return "var(--color-1x)";
+        if (v >= 10) return "var(--oxblood)";
+        return "var(--oxblood-deep)";
+      }
+
+      // ── Layer-specific content ─────────────────────────────────
+      const content = {
+        a: [
+          {
+            max: 15,
+            heading: "Drowning.",
+            body: "Fragmented tools. Re-explaining context everywhere. Tracking commitments in your head. The calendar runs you.",
+            felt: "Chaos is the default.",
+          },
+          {
+            max: 35,
+            heading: "Treading water.",
+            body: "Some things have a home. Most context still lives in your head. Too many small decisions consuming too much energy.",
+            felt: "You know what matters but keep losing the thread.",
+          },
+          {
+            max: 55,
+            heading: "Finding the floor.",
+            body: "Context is organized. Priorities are starting to surface. Cognitive load is dropping but still fragile.",
+            felt: "Good days are becoming the norm, not the exception.",
+          },
+          {
+            max: 75,
+            heading: "Solid ground.",
+            body: "Important people, projects, and decisions are organized. The biggest domino for the day is always visible. Focus rises.",
+            felt: "You run the week. It no longer runs you.",
+          },
+          {
+            max: 95,
+            heading: "Near full capacity.",
+            body: "Living system for context, memory, and prioritization. Operating from clarity. Almost nothing drops.",
+            felt: "Clear, present, focused.",
+          },
+          {
+            max: 100,
+            heading: "Full creative capacity.",
+            body: "Nothing important gets forgotten. Cognitive load fully offloaded. You show up at your hundred percent every day.",
+            felt: "Operating in your gift.",
+          },
+        ],
+        b: [
+          {
+            max: 15,
+            heading: "Solo.",
+            body: "You are the bottleneck for every moving part. Everything happens sequentially. Delegation is a fantasy.",
+            felt: "There are not enough hours.",
+          },
+          {
+            max: 35,
+            heading: "First hires.",
+            body: "A research agent is investigating. Some monitoring in place. Most work still flows through you.",
+            felt: "Glimpses of leverage, but you still carry most of it.",
+          },
+          {
+            max: 55,
+            heading: "Small team.",
+            body: "Specialized agents for research, documentation, and monitoring. Scheduled work runs in background. Follow-through improving.",
+            felt: "Work that took days starts happening in hours.",
+          },
+          {
+            max: 75,
+            heading: "Real delegation.",
+            body: "Operations agents moving workflows across tools. Integrations touching your real stack. You stop being the bottleneck.",
+            felt: "Delegation actually works.",
+          },
+          {
+            max: 95,
+            heading: "Full team.",
+            body: "Parallel execution across research, writing, operations, and decisions. The system keeps watching while you focus on judgment and direction.",
+            felt: "A team of specialists, each with your context.",
+          },
+          {
+            max: 100,
+            heading: "Maximum capacity.",
+            body: "What used to cost a calendar now costs a prompt. The things you care about but never had time for become everyday output.",
+            felt: "None of the meetings. All of the leverage.",
+          },
+        ],
+        c: [
+          {
+            max: 15,
+            heading: "Ideas stay ideas.",
+            body: "The gap between imagination and execution is months. You ration ambition because bandwidth is the constraint.",
+            felt: "You think bigger than you can build.",
+          },
+          {
+            max: 35,
+            heading: "Slow prototyping.",
+            body: "Some ideas reach execution. Most still require weeks of manual effort. The friction is visible.",
+            felt: "Progress, but you feel the weight.",
+          },
+          {
+            max: 55,
+            heading: "Faster loops.",
+            body: "Rough ideas produce concrete options within days. Rapid prototyping is possible. The gap is narrowing.",
+            felt: "You stop staring at blank pages.",
+          },
+          {
+            max: 75,
+            heading: "Overnight execution.",
+            body: "The system does legwork while you sleep. You wake to drafts waiting, research briefed, decisions teed up.",
+            felt: "Friction is disappearing.",
+          },
+          {
+            max: 95,
+            heading: "Near speed of thought.",
+            body: "A one-line instruction produces a shipped artifact before lunch. Ambition is no longer rationed. What took weeks takes days.",
+            felt: "The constraint is taste, not bandwidth.",
+          },
+          {
+            max: 100,
+            heading: "Speed of thought.",
+            body: "The gap between idea and execution approaches zero. Vision articulation, analysis, build, validation, iteration, scale — in days, not months.",
+            felt: "You will not recognize the pace you used to work at.",
+          },
+        ],
+      };
+
+      function getContent(layer, pct) {
+        const levels = content[layer];
+        for (const level of levels) {
+          if (pct <= level.max) return level;
+        }
+        return levels[levels.length - 1];
+      }
+
+      // Narrative for V4 dashboard
+      function getNarrative(a, b, c, total) {
+        if (total >= 95)
+          return "All three layers compounding. This is the compass at full north. The arc plays out over years — and the magnification is real.";
+        if (total >= 70)
+          return "Strong across the board. The compounding is visible — what took weeks now takes days.";
+        if (total >= 40)
+          return "Solid foundation, meaningful leverage. There is room to grow and the direction is clear.";
+        const min = Math.min(a, b, c);
+        const weak =
+          min === a ? "Efficiency" : min === b ? "Capacity" : "Creativity";
+        if (total >= 15)
+          return `${weak} is the bottleneck at ${min}%. Strengthening it would unlock the most leverage.`;
+        if (total > 0)
+          return `Major gaps are capping your multiplier. Start with the weakest layer and build up.`;
+        return "Zero in any layer zeroes the whole system. Every layer matters.";
+      }
+
+      // ── State ──────────────────────────────────────────────────
+      const S = {
+        v1: { a: 100, b: 100, c: 100 },
+        v2: { a: 100, b: 100, c: 100 },
+        v3: { a: 100, b: 100, c: 100 },
+        v4: { a: 100, b: 100, c: 100 },
+        v5: { a: 100, b: 100, c: 100 },
+      };
+
+      // ── V1: Narrative Sliders ──────────────────────────────────
+      document.querySelectorAll("#v1-cards .v1-card").forEach((card) => {
+        const layer = card.dataset.layer;
+        const input = card.querySelector("input");
+        input.addEventListener("input", () => {
+          S.v1[layer] = +input.value;
+          renderV1();
+        });
+      });
+
+      function renderV1() {
+        const { a, b, c } = S.v1;
+        const total = calc(a, b, c);
+        document.getElementById("v1-result").textContent = fmt(total);
+        document.getElementById("v1-result").style.color = rcolor(total);
+
+        ["a", "b", "c"].forEach((layer) => {
+          const card = document.querySelector(
+            `#v1-cards [data-layer="${layer}"]`,
+          );
+          const val = S.v1[layer];
+          card.querySelector(".v1-pct").textContent = val + "%";
+          const c = getContent(layer, val);
+          card.querySelector(".v1-card-heading").textContent = c.heading;
+          card.querySelector(".v1-card-body").textContent = c.body;
+        });
+
+        const min = Math.min(a, b, c);
+        const weakest =
+          min === a ? "Efficiency" : min === b ? "Capacity" : "Creativity";
+        const el = document.getElementById("v1-insight");
+        if (total >= 95)
+          el.textContent =
+            "All three layers compounding. 100× is the compass. The journey is years. The magnification is real.";
+        else if (total === 0)
+          el.textContent = "Zero in any layer zeroes everything.";
+        else
+          el.textContent = `${weakest} at ${min}% is your ceiling. Raise it and the whole system compounds.`;
+      }
+      renderV1();
+
+      // ── V2: Content Rings ──────────────────────────────────────
+      document.querySelectorAll("#v2 .v2-layer-block").forEach((block) => {
+        const layer = block.dataset.layer;
+        const input = block.querySelector("input");
+        input.addEventListener("input", () => {
+          S.v2[layer] = +input.value;
+          renderV2();
+        });
+      });
+
+      function renderV2() {
+        const { a, b, c } = S.v2;
+        const total = calc(a, b, c);
+        const innerCap = a / 100;
+        const midCap = innerCap * (b / 100);
+        const outerCap = midCap * (c / 100);
+
+        const circA = 2 * Math.PI * 95;
+        const circB = 2 * Math.PI * 135;
+        const circC = 2 * Math.PI * 175;
+
+        document
+          .getElementById("v2-ring-a")
+          .setAttribute("stroke-dashoffset", circA * (1 - a / 100));
+        document
+          .getElementById("v2-ring-b")
+          .setAttribute("stroke-dashoffset", circB * (1 - midCap));
+        document
+          .getElementById("v2-ring-c")
+          .setAttribute("stroke-dashoffset", circC * (1 - outerCap));
+        document.getElementById("v2-center").textContent = fmt(total);
+        document
+          .getElementById("v2-center")
+          .setAttribute("fill", rcolor(total));
+
+        // Update indicators and labels
+        ["a", "b", "c"].forEach((layer) => {
+          const block = document.querySelector(`#v2 [data-layer="${layer}"]`);
+          const val = S.v2[layer];
+          block.querySelector(".v2-layer-pct").textContent = val + "%";
+          block.querySelectorAll(".v2-indicator").forEach((ind) => {
+            const thresh = +ind.dataset.thresh;
+            ind.classList.toggle("active", val >= thresh);
+          });
+        });
+      }
+      renderV2();
+
+      // ── V3: The Journey ────────────────────────────────────────
+      document.querySelectorAll("#v3-chapters .v3-chapter").forEach((ch) => {
+        const layer = ch.dataset.layer;
+        const input = ch.querySelector("input");
+        input.addEventListener("input", () => {
+          S.v3[layer] = +input.value;
+          renderV3();
+        });
+      });
+
+      function renderV3() {
+        const { a, b, c } = S.v3;
+        const total = calc(a, b, c);
+        document.getElementById("v3-result").textContent = fmt(total);
+        document.getElementById("v3-result").style.color = rcolor(total);
+        document.getElementById("v3-eq-a").textContent = a;
+        document.getElementById("v3-eq-b").textContent = b;
+        document.getElementById("v3-eq-c").textContent = c;
+
+        ["a", "b", "c"].forEach((layer) => {
+          const ch = document.querySelector(
+            `#v3-chapters [data-layer="${layer}"]`,
+          );
+          const val = S.v3[layer];
+          ch.querySelector(".v3-slider-pct").textContent = val + "%";
+          const c = getContent(layer, val);
+          ch.querySelector(".v3-chapter-text").textContent = c.body;
+          ch.querySelector(".v3-chapter-felt").textContent = c.felt;
+        });
+      }
+      renderV3();
+
+      // ── V4: The Dashboard ──────────────────────────────────────
+      document.querySelectorAll("#v4-stats .v4-stat-card").forEach((card) => {
+        const layer = card.dataset.layer;
+        const input = card.querySelector("input");
+        input.addEventListener("input", () => {
+          S.v4[layer] = +input.value;
+          renderV4();
+        });
+      });
+
+      function renderV4() {
+        const { a, b, c } = S.v4;
+        const total = calc(a, b, c);
+        document.getElementById("v4-result").textContent = fmt(total);
+        document.getElementById("v4-result").style.color = rcolor(total);
+        document.getElementById("v4-narrative").textContent = getNarrative(
+          a,
+          b,
+          c,
+          total,
+        );
+
+        ["a", "b", "c"].forEach((layer) => {
+          const card = document.querySelector(
+            `#v4-stats [data-layer="${layer}"]`,
+          );
+          const val = S.v4[layer];
+          const circ = 2 * Math.PI * 50;
+          const fill = card.querySelector(".v4-gauge-fill");
+          fill.setAttribute("stroke-dashoffset", circ * (1 - val / 100));
+          card.querySelector(".v4-gauge-text").textContent = val + "%";
+
+          const ct = getContent(layer, val);
+          card.querySelector(".v4-stat-tagline").textContent = ct.heading;
+
+          card.querySelectorAll(".v4-bullets li").forEach((li) => {
+            const thresh = +li.dataset.thresh;
+            li.classList.toggle("active", val >= thresh);
+          });
+        });
+      }
+      renderV4();
+
+      // ── V5: The Stack ──────────────────────────────────────────
+      document
+        .querySelectorAll("#v5 .v5-controls-col input")
+        .forEach((input) => {
+          const layer = input.dataset.layer;
+          input.addEventListener("input", () => {
+            S.v5[layer] = +input.value;
+            renderV5();
+          });
+        });
+
+      function renderV5() {
+        const { a, b, c } = S.v5;
+        const total = calc(a, b, c);
+        document.getElementById("v5-result").textContent = fmt(total);
+        document.getElementById("v5-result").style.color = rcolor(total);
+        document.getElementById("v5-pct-a").textContent = a + "%";
+        document.getElementById("v5-pct-b").textContent = b + "%";
+        document.getElementById("v5-pct-c").textContent = c + "%";
+
+        ["a", "b", "c"].forEach((layer) => {
+          const band = document.querySelector(
+            `#v5-stack [data-band="${layer}"]`,
+          );
+          const val = S.v5[layer];
+          const flexVal = Math.max(val, 5); // minimum visible height
+          band.style.flex = flexVal;
+          band.classList.toggle("compressed", val < 30);
+          band.querySelector(".v5-band-title").style.opacity =
+            val < 15 ? "0" : "1";
+        });
+      }
+      renderV5();
+    </script>
+  </body>
+</html>
