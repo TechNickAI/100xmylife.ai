@@ -5,52 +5,70 @@
 /* Design tokens ---------------------------------------------------------- */
 :root {
   /* Palette: warm parchment, dark ink, oxblood accent */
-  --paper:        #f3ebdd;
-  --paper-soft:   #ece2d0;
-  --ink:          #15130e;
-  --ink-dim:      #4a4238;
-  --ink-faint:    #8a7c6a;
-  --oxblood:      #a83919;
+  --paper: #f3ebdd;
+  --paper-soft: #ece2d0;
+  --ink: #15130e;
+  --ink-dim: #4a4238;
+  --ink-faint: #8a7c6a;
+  --oxblood: #a83919;
   --oxblood-deep: #7a2710;
-  --rule:         rgba(21, 19, 14, 0.22);
-  --rule-soft:    rgba(21, 19, 14, 0.10);
+  --rule: rgba(21, 19, 14, 0.22);
+  --rule-soft: rgba(21, 19, 14, 0.1);
 
   /* Typography */
   --display: "Fraunces", "Times New Roman", Georgia, serif;
-  --body:    "Instrument Sans", -apple-system, system-ui, sans-serif;
-  --mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --body: "Instrument Sans", -apple-system, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Scale */
-  --fs-eyebrow:  0.75rem;
-  --fs-body:     1.0625rem;
-  --fs-lead:     1.1875rem;
-  --fs-sub:      clamp(1.125rem, 1.3vw, 1.375rem);
-  --fs-heading:  clamp(1.9rem, 3.4vw, 3.1rem);
-  --fs-display:  clamp(2.6rem, 6.3vw, 5.6rem);
+  --fs-eyebrow: 0.75rem;
+  --fs-body: 1.0625rem;
+  --fs-lead: 1.1875rem;
+  --fs-sub: clamp(1.125rem, 1.3vw, 1.375rem);
+  --fs-heading: clamp(1.9rem, 3.4vw, 3.1rem);
+  --fs-display: clamp(2.6rem, 6.3vw, 5.6rem);
   /* upper clamp sized so the 4-glyph "100×" fits inside the numeral column
      at the widest layout, with comfortable room on either side */
-  --fs-numeral:  clamp(6rem, 18vw, 13rem);
+  --fs-numeral: clamp(6rem, 18vw, 13rem);
 
   /* Spacing (vertical rhythm) */
-  --space-2:  1rem;
-  --space-3:  1.75rem;
-  --space-4:  2.75rem;
-  --space-5:  4.25rem;
-  --space-6:  6.5rem;
-  --space-7:  9rem;
+  --space-2: 1rem;
+  --space-3: 1.75rem;
+  --space-4: 2.75rem;
+  --space-5: 4.25rem;
+  --space-6: 6.5rem;
+  --space-7: 9rem;
 
   /* Page frame */
   --page-gutter: clamp(1.25rem, 4vw, 3.5rem);
-  --page-max:    72rem;
+  --page-max: 72rem;
 }
 
 /* Reset ------------------------------------------------------------------ */
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
-img, svg { display: block; max-width: 100%; }
-button { font: inherit; }
-a { color: inherit; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+button {
+  font: inherit;
+}
+a {
+  color: inherit;
+}
 
 /* Base ------------------------------------------------------------------- */
 html {
@@ -63,8 +81,16 @@ body {
   font-size: var(--fs-body);
   line-height: 1.55;
   background:
-    radial-gradient(1200px 800px at 85% -10%, rgba(168, 57, 25, 0.05), transparent 60%),
-    radial-gradient(1400px 900px at -10% 20%, rgba(21, 19, 14, 0.045), transparent 55%),
+    radial-gradient(
+      1200px 800px at 85% -10%,
+      rgba(168, 57, 25, 0.05),
+      transparent 60%
+    ),
+    radial-gradient(
+      1400px 900px at -10% 20%,
+      rgba(21, 19, 14, 0.045),
+      transparent 55%
+    ),
     var(--paper);
   /* Subtle paper grain via layered gradients */
   position: relative;
@@ -82,22 +108,50 @@ body::before {
   opacity: 0.2;
   mix-blend-mode: multiply;
   background-image:
-    radial-gradient(circle at 13% 22%, rgba(21, 19, 14, 0.04) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 67% 54%, rgba(21, 19, 14, 0.035) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 88% 83%, rgba(21, 19, 14, 0.04) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 42% 78%, rgba(21, 19, 14, 0.03) 0 1px, transparent 1.5px);
-  background-size: 37px 37px, 43px 43px, 53px 53px, 61px 61px;
+    radial-gradient(
+      circle at 13% 22%,
+      rgba(21, 19, 14, 0.04) 0 1px,
+      transparent 1.5px
+    ),
+    radial-gradient(
+      circle at 67% 54%,
+      rgba(21, 19, 14, 0.035) 0 1px,
+      transparent 1.5px
+    ),
+    radial-gradient(
+      circle at 88% 83%,
+      rgba(21, 19, 14, 0.04) 0 1px,
+      transparent 1.5px
+    ),
+    radial-gradient(
+      circle at 42% 78%,
+      rgba(21, 19, 14, 0.03) 0 1px,
+      transparent 1.5px
+    );
+  background-size:
+    37px 37px,
+    43px 43px,
+    53px 53px,
+    61px 61px;
   z-index: 0;
 }
 
-main, header, footer, section { position: relative; z-index: 1; }
+main,
+header,
+footer,
+section {
+  position: relative;
+  z-index: 1;
+}
 
 /* Typography primitives -------------------------------------------------- */
 .display {
   font-family: var(--display);
   font-weight: 420;
   font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 30, "opsz" 144;
+  font-variation-settings:
+    "SOFT" 30,
+    "opsz" 144;
   font-size: var(--fs-display);
   line-height: 0.98;
   letter-spacing: -0.028em;
@@ -111,7 +165,9 @@ main, header, footer, section { position: relative; z-index: 1; }
 
 .display em {
   font-style: italic;
-  font-variation-settings: "SOFT" 80, "opsz" 144;
+  font-variation-settings:
+    "SOFT" 80,
+    "opsz" 144;
   color: var(--oxblood);
 }
 
@@ -119,7 +175,9 @@ main, header, footer, section { position: relative; z-index: 1; }
   font-family: var(--display);
   font-weight: 380;
   font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 40, "opsz" 96;
+  font-variation-settings:
+    "SOFT" 40,
+    "opsz" 96;
   font-size: var(--fs-heading);
   line-height: 1.02;
   letter-spacing: -0.022em;
@@ -129,7 +187,9 @@ main, header, footer, section { position: relative; z-index: 1; }
 
 .section-heading em {
   font-style: italic;
-  font-variation-settings: "SOFT" 100, "opsz" 96;
+  font-variation-settings:
+    "SOFT" 100,
+    "opsz" 96;
   color: var(--oxblood);
 }
 
@@ -182,10 +242,16 @@ main, header, footer, section { position: relative; z-index: 1; }
   padding-inline: var(--page-gutter);
 }
 
-.section-head { margin-bottom: var(--space-5); }
+.section-head {
+  margin-bottom: var(--space-5);
+}
 
-section { padding-block: var(--space-6); }
-section + section { border-top: 1px solid var(--rule-soft); }
+section {
+  padding-block: var(--space-6);
+}
+section + section {
+  border-top: 1px solid var(--rule-soft);
+}
 
 /* Masthead --------------------------------------------------------------- */
 .masthead {
@@ -209,7 +275,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 .marque-num {
   font-family: var(--display);
   font-weight: 520;
-  font-variation-settings: "SOFT" 20, "opsz" 96;
+  font-variation-settings:
+    "SOFT" 20,
+    "opsz" 96;
   font-size: 1.55rem;
   color: var(--oxblood);
   letter-spacing: -0.03em;
@@ -218,7 +286,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 .marque-word {
   font-family: var(--display);
   font-weight: 340;
-  font-variation-settings: "SOFT" 60, "opsz" 96;
+  font-variation-settings:
+    "SOFT" 60,
+    "opsz" 96;
   font-size: 1.35rem;
   color: var(--ink);
   letter-spacing: -0.015em;
@@ -247,7 +317,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
   color: var(--ink);
   padding: 0.55rem 0.95rem;
   border: 1px solid var(--ink);
-  transition: background 180ms ease, color 180ms ease;
+  transition:
+    background 180ms ease,
+    color 180ms ease;
 }
 
 .nav-cta:hover {
@@ -276,7 +348,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
   align-items: start;
 }
 
-.hero-lede { min-width: 0; }
+.hero-lede {
+  min-width: 0;
+}
 
 .hero-sub {
   font-size: var(--fs-sub);
@@ -314,7 +388,11 @@ section + section { border-top: 1px solid var(--rule-soft); }
   align-items: center;
   padding: 1rem 1.3rem;
   border: 1px solid var(--ink);
-  transition: transform 200ms ease, background 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  transition:
+    transform 200ms ease,
+    background 200ms ease,
+    color 200ms ease,
+    box-shadow 200ms ease;
 }
 
 .btn-primary {
@@ -358,8 +436,12 @@ section + section { border-top: 1px solid var(--rule-soft); }
   border-top: 1px solid var(--rule-soft);
 }
 
-.ladder .rung:first-of-type { border-top-color: var(--rule); }
-.ladder .rung:last-of-type  { border-bottom: 1px solid var(--rule); }
+.ladder .rung:first-of-type {
+  border-top-color: var(--rule);
+}
+.ladder .rung:last-of-type {
+  border-bottom: 1px solid var(--rule);
+}
 
 .numeral-wrap {
   min-width: 0;
@@ -375,7 +457,10 @@ section + section { border-top: 1px solid var(--rule-soft); }
   font-optical-sizing: auto;
   /* starts with subtle softness so mid-scroll visitors still see character,
      then eases further soft once the element enters view (via JS). */
-  font-variation-settings: "SOFT" 30, "opsz" 144, "wght" 360;
+  font-variation-settings:
+    "SOFT" 30,
+    "opsz" 144,
+    "wght" 360;
   line-height: 0.82;
   color: var(--ink);
   letter-spacing: -0.06em;
@@ -383,25 +468,41 @@ section + section { border-top: 1px solid var(--rule-soft); }
   transition: font-variation-settings 1400ms cubic-bezier(0.2, 0.7, 0.1, 1);
 }
 
-.rung-1x   .numeral { color: var(--ink); }
-.rung-10x  .numeral { color: var(--ink); }
+.rung-1x .numeral {
+  color: var(--ink);
+}
+.rung-10x .numeral {
+  color: var(--ink);
+}
 .rung-100x .numeral {
   /* crescendo: oxblood + a more pronounced softening + heavier weight
      combine to make the top rung read as a structural climax, without
      a size bump that would overflow the grid column. */
   color: var(--oxblood);
-  font-variation-settings: "SOFT" 70, "opsz" 144, "wght" 400;
+  font-variation-settings:
+    "SOFT" 70,
+    "opsz" 144,
+    "wght" 400;
 }
 
 .numeral.is-soft {
-  font-variation-settings: "SOFT" 100, "opsz" 144, "wght" 420;
+  font-variation-settings:
+    "SOFT" 100,
+    "opsz" 144,
+    "wght" 420;
 }
 
 .rung-100x .numeral.is-soft {
-  font-variation-settings: "SOFT" 100, "opsz" 144, "wght" 460;
+  font-variation-settings:
+    "SOFT" 100,
+    "opsz" 144,
+    "wght" 460;
 }
 
-.rung-body { min-width: 0; max-width: 38rem; }
+.rung-body {
+  min-width: 0;
+  max-width: 38rem;
+}
 
 .rung-label {
   font-family: var(--mono);
@@ -415,7 +516,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 .rung-heading {
   font-family: var(--display);
   font-weight: 380;
-  font-variation-settings: "SOFT" 50, "opsz" 96;
+  font-variation-settings:
+    "SOFT" 50,
+    "opsz" 96;
   font-size: clamp(1.55rem, 2.5vw, 2.1rem);
   line-height: 1.08;
   letter-spacing: -0.02em;
@@ -431,7 +534,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
   max-width: 42ch;
 }
 
-.rung-margin { max-width: 28ch; }
+.rung-margin {
+  max-width: 28ch;
+}
 
 /* How it works ----------------------------------------------------------- */
 .how-it-works .steps {
@@ -461,7 +566,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 .step-heading {
   font-family: var(--display);
   font-weight: 400;
-  font-variation-settings: "SOFT" 40, "opsz" 96;
+  font-variation-settings:
+    "SOFT" 40,
+    "opsz" 96;
   font-size: 1.55rem;
   letter-spacing: -0.015em;
   margin: 0 0 0.75rem;
@@ -492,7 +599,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 .deliverable-label {
   grid-row: 1 / span 2;
   font-family: var(--display);
-  font-variation-settings: "SOFT" 10, "opsz" 48;
+  font-variation-settings:
+    "SOFT" 10,
+    "opsz" 48;
   font-weight: 440;
   font-size: 2.3rem;
   line-height: 0.9;
@@ -503,7 +612,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 .deliverable-heading {
   font-family: var(--display);
   font-weight: 420;
-  font-variation-settings: "SOFT" 40, "opsz" 96;
+  font-variation-settings:
+    "SOFT" 40,
+    "opsz" 96;
   font-size: 1.35rem;
   line-height: 1.12;
   letter-spacing: -0.012em;
@@ -520,7 +631,12 @@ section + section { border-top: 1px solid var(--rule-soft); }
 /* Oversight -------------------------------------------------------------- */
 .oversight {
   background: var(--paper-soft);
-  border-block: 1px solid var(--rule);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.oversight + section {
+  border-top: none;
 }
 
 .oversight-inner {
@@ -545,7 +661,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 .pullquote p {
   font-family: var(--display);
   font-weight: 340;
-  font-variation-settings: "SOFT" 70, "opsz" 144;
+  font-variation-settings:
+    "SOFT" 70,
+    "opsz" 144;
   font-size: clamp(2.2rem, 5vw, 4rem);
   line-height: 1.02;
   letter-spacing: -0.028em;
@@ -556,7 +674,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 
 .pullquote em {
   font-style: italic;
-  font-variation-settings: "SOFT" 100, "opsz" 144;
+  font-variation-settings:
+    "SOFT" 100,
+    "opsz" 144;
   color: var(--oxblood);
 }
 
@@ -567,8 +687,12 @@ section + section { border-top: 1px solid var(--rule-soft); }
   max-width: 40ch;
 }
 
-.oversight-body p { margin: 0 0 1.1rem; }
-.oversight-body p:last-child { margin: 0; }
+.oversight-body p {
+  margin: 0 0 1.1rem;
+}
+.oversight-body p:last-child {
+  margin: 0;
+}
 
 /* Patterns --------------------------------------------------------------- */
 .patterns-grid {
@@ -581,7 +705,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 .patterns-text {
   font-family: var(--display);
   font-weight: 360;
-  font-variation-settings: "SOFT" 50, "opsz" 96;
+  font-variation-settings:
+    "SOFT" 50,
+    "opsz" 96;
   font-size: clamp(1.25rem, 2vw, 1.7rem);
   line-height: 1.38;
   letter-spacing: -0.01em;
@@ -632,7 +758,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 .fit-col li {
   font-family: var(--display);
   font-weight: 360;
-  font-variation-settings: "SOFT" 40, "opsz" 48;
+  font-variation-settings:
+    "SOFT" 40,
+    "opsz" 48;
   font-size: 1.2rem;
   line-height: 1.32;
   letter-spacing: -0.01em;
@@ -651,8 +779,12 @@ section + section { border-top: 1px solid var(--rule-soft); }
   background: var(--oxblood);
 }
 
-.fit-not li { color: var(--ink-dim); }
-.fit-not li::before { background: var(--ink-faint); }
+.fit-not li {
+  color: var(--ink-dim);
+}
+.fit-not li::before {
+  background: var(--ink-faint);
+}
 
 /* FAQ -------------------------------------------------------------------- */
 .faq-list {
@@ -669,12 +801,16 @@ section + section { border-top: 1px solid var(--rule-soft); }
   border-top: 1px solid var(--rule);
 }
 
-.faq-item:last-child { border-bottom: 1px solid var(--rule); }
+.faq-item:last-child {
+  border-bottom: 1px solid var(--rule);
+}
 
 .faq-item dt {
   font-family: var(--display);
   font-weight: 380;
-  font-variation-settings: "SOFT" 40, "opsz" 96;
+  font-variation-settings:
+    "SOFT" 40,
+    "opsz" 96;
   font-size: clamp(1.2rem, 2vw, 1.6rem);
   line-height: 1.14;
   letter-spacing: -0.012em;
@@ -698,7 +834,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 .closing-heading {
   font-family: var(--display);
   font-weight: 360;
-  font-variation-settings: "SOFT" 60, "opsz" 144;
+  font-variation-settings:
+    "SOFT" 60,
+    "opsz" 144;
   font-size: clamp(2rem, 4.8vw, 4rem);
   line-height: 1.02;
   letter-spacing: -0.025em;
@@ -748,9 +886,16 @@ section + section { border-top: 1px solid var(--rule-soft); }
 
 /* Reduced motion --------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
-  [data-reveal] { opacity: 1; transform: none; }
-  .numeral { font-variation-settings: "SOFT" 80, "opsz" 144, "wght" 400; }
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  .numeral {
+    font-variation-settings:
+      "SOFT" 80,
+      "opsz" 144,
+      "wght" 400;
+  }
 }
 
 /* Responsive ------------------------------------------------------------- */
@@ -768,7 +913,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
     grid-template-columns: minmax(0, 1fr);
     gap: 1.25rem;
   }
-  .numeral-wrap { justify-content: flex-start; }
+  .numeral-wrap {
+    justify-content: flex-start;
+  }
 
   .how-it-works .steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -790,7 +937,9 @@ section + section { border-top: 1px solid var(--rule-soft); }
 }
 
 @media (max-width: 640px) {
-  :root { --fs-numeral: clamp(5rem, 26vw, 9rem); }
+  :root {
+    --fs-numeral: clamp(5rem, 26vw, 9rem);
+  }
 
   .masthead-inner {
     flex-direction: column;
@@ -816,5 +965,8 @@ section + section { border-top: 1px solid var(--rule-soft); }
     align-items: flex-start;
   }
 
-  .btn { padding: 0.9rem 1.1rem; font-size: 0.74rem; }
+  .btn {
+    padding: 0.9rem 1.1rem;
+    font-size: 0.74rem;
+  }
 }
