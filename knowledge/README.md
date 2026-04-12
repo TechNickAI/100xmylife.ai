@@ -17,4 +17,4 @@ This folder is the strategy pack for building the `100xmylife.ai` website.
 
 ## How to use it
 
-Start with the curated docs. Use `raw/` to find the original local workspace files when you need deeper evidence or wording. Do not copy private details from those files into the repo without sanitizing them first.
+Start with the curated docs. The latest transcript- and memory-derived positioning, packaging, and operating insights have been folded into the existing core docs, especially `site-brief.md`, `business-context.md`, `product-offer.md`, `client-examples.md`, and `known-constraints.md`. Use `raw/` to find the original local workspace files when you need deeper evidence or wording. Do not copy private details from those files into the repo without sanitizing them first.

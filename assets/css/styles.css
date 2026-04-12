@@ -1,0 +1,820 @@
+/* =========================================================================
+   100xmylife.ai — editorial parchment
+   ========================================================================= */
+
+/* Design tokens ---------------------------------------------------------- */
+:root {
+  /* Palette: warm parchment, dark ink, oxblood accent */
+  --paper:        #f3ebdd;
+  --paper-soft:   #ece2d0;
+  --ink:          #15130e;
+  --ink-dim:      #4a4238;
+  --ink-faint:    #8a7c6a;
+  --oxblood:      #a83919;
+  --oxblood-deep: #7a2710;
+  --rule:         rgba(21, 19, 14, 0.22);
+  --rule-soft:    rgba(21, 19, 14, 0.10);
+
+  /* Typography */
+  --display: "Fraunces", "Times New Roman", Georgia, serif;
+  --body:    "Instrument Sans", -apple-system, system-ui, sans-serif;
+  --mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Scale */
+  --fs-eyebrow:  0.75rem;
+  --fs-body:     1.0625rem;
+  --fs-lead:     1.1875rem;
+  --fs-sub:      clamp(1.125rem, 1.3vw, 1.375rem);
+  --fs-heading:  clamp(1.9rem, 3.4vw, 3.1rem);
+  --fs-display:  clamp(2.6rem, 6.3vw, 5.6rem);
+  /* upper clamp sized so the 4-glyph "100×" fits inside the numeral column
+     at the widest layout, with comfortable room on either side */
+  --fs-numeral:  clamp(6rem, 18vw, 13rem);
+
+  /* Spacing (vertical rhythm) */
+  --space-2:  1rem;
+  --space-3:  1.75rem;
+  --space-4:  2.75rem;
+  --space-5:  4.25rem;
+  --space-6:  6.5rem;
+  --space-7:  9rem;
+
+  /* Page frame */
+  --page-gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --page-max:    72rem;
+}
+
+/* Reset ------------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; }
+a { color: inherit; }
+
+/* Base ------------------------------------------------------------------- */
+html {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--body);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  background:
+    radial-gradient(1200px 800px at 85% -10%, rgba(168, 57, 25, 0.05), transparent 60%),
+    radial-gradient(1400px 900px at -10% 20%, rgba(21, 19, 14, 0.045), transparent 55%),
+    var(--paper);
+  /* Subtle paper grain via layered gradients */
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  /* fiber texture: faint speckle using crossed radial gradients.
+     Prime tile sizes > 31px dither the repeat so banding stays invisible. */
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(circle at 13% 22%, rgba(21, 19, 14, 0.04) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 67% 54%, rgba(21, 19, 14, 0.035) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 88% 83%, rgba(21, 19, 14, 0.04) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 42% 78%, rgba(21, 19, 14, 0.03) 0 1px, transparent 1.5px);
+  background-size: 37px 37px, 43px 43px, 53px 53px, 61px 61px;
+  z-index: 0;
+}
+
+main, header, footer, section { position: relative; z-index: 1; }
+
+/* Typography primitives -------------------------------------------------- */
+.display {
+  font-family: var(--display);
+  font-weight: 420;
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+  font-size: var(--fs-display);
+  line-height: 0.98;
+  letter-spacing: -0.028em;
+  color: var(--ink);
+  margin: 0;
+  max-width: 14ch;
+  /* modern-browser orphan fix: lets the browser rebalance lines so no
+     single word (e.g., "run.") gets stranded on its own. */
+  text-wrap: balance;
+}
+
+.display em {
+  font-style: italic;
+  font-variation-settings: "SOFT" 80, "opsz" 144;
+  color: var(--oxblood);
+}
+
+.section-heading {
+  font-family: var(--display);
+  font-weight: 380;
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 40, "opsz" 96;
+  font-size: var(--fs-heading);
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  margin: 0;
+  max-width: 26ch;
+}
+
+.section-heading em {
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "opsz" 96;
+  color: var(--oxblood);
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 var(--space-3);
+}
+
+/* Marginalia (side notes, editor's annotations) */
+.marginalia {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--ink-dim);
+  border-left: 1px solid var(--rule);
+  padding: 0.25rem 0 0.25rem 0.9rem;
+  max-width: 22ch;
+  margin: 0;
+}
+
+.margin-label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  margin-bottom: 0.35rem;
+}
+
+/* Page frame wrapper ----------------------------------------------------- */
+.section-head,
+.masthead-inner,
+.hero-grid,
+.ladder > article,
+.steps,
+.deliverable-list,
+.oversight-inner,
+.patterns-grid,
+.fit-columns,
+.faq-list,
+.closing-inner,
+.footer-inner {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+.section-head { margin-bottom: var(--space-5); }
+
+section { padding-block: var(--space-6); }
+section + section { border-top: 1px solid var(--rule-soft); }
+
+/* Masthead --------------------------------------------------------------- */
+.masthead {
+  padding-top: 1.5rem;
+}
+
+.masthead-inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.marque {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.12em;
+}
+
+.marque-num {
+  font-family: var(--display);
+  font-weight: 520;
+  font-variation-settings: "SOFT" 20, "opsz" 96;
+  font-size: 1.55rem;
+  color: var(--oxblood);
+  letter-spacing: -0.03em;
+}
+
+.marque-word {
+  font-family: var(--display);
+  font-weight: 340;
+  font-variation-settings: "SOFT" 60, "opsz" 96;
+  font-size: 1.35rem;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+
+.primary-nav {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1.25rem;
+}
+
+.nav-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--ink);
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.nav-cta:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.masthead-rule {
+  max-width: calc(var(--page-max) + (2 * var(--page-gutter)));
+  margin-inline: auto;
+  margin-top: 1.25rem;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* Hero ------------------------------------------------------------------- */
+.hero {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-7);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 16rem);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.hero-lede { min-width: 0; }
+
+.hero-sub {
+  font-size: var(--fs-sub);
+  line-height: 1.5;
+  color: var(--ink-dim);
+  max-width: 42ch;
+  margin: var(--space-4) 0 var(--space-4);
+}
+
+.hero-note {
+  justify-self: end;
+  padding-top: 0.75rem;
+}
+
+/* CTAs ------------------------------------------------------------------- */
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.1rem;
+  align-items: center;
+}
+
+.cta-row-center {
+  justify-content: center;
+  margin-top: var(--space-4);
+}
+
+.btn {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 1.3rem;
+  border: 1px solid var(--ink);
+  transition: transform 200ms ease, background 200ms ease, color 200ms ease, box-shadow 200ms ease;
+}
+
+.btn-primary {
+  background: var(--oxblood);
+  border-color: var(--oxblood);
+  color: var(--paper);
+  box-shadow: 0 0 0 0 rgba(168, 57, 25, 0);
+}
+
+.btn-primary:hover {
+  background: var(--oxblood-deep);
+  border-color: var(--oxblood-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px -16px rgba(122, 39, 16, 0.55);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-1px);
+}
+
+/* Ladder ----------------------------------------------------------------- */
+.ladder {
+  padding-block: var(--space-6) var(--space-7);
+}
+
+.ladder .rung {
+  display: grid;
+  /* numeral column gets 1.15fr to comfortably hold the 4-glyph "100×"
+     at widest breakpoints without overflow into the body column */
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--rule-soft);
+}
+
+.ladder .rung:first-of-type { border-top-color: var(--rule); }
+.ladder .rung:last-of-type  { border-bottom: 1px solid var(--rule); }
+
+.numeral-wrap {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.numeral {
+  font-family: var(--display);
+  font-size: var(--fs-numeral);
+  font-weight: 360;
+  font-optical-sizing: auto;
+  /* starts with subtle softness so mid-scroll visitors still see character,
+     then eases further soft once the element enters view (via JS). */
+  font-variation-settings: "SOFT" 30, "opsz" 144, "wght" 360;
+  line-height: 0.82;
+  color: var(--ink);
+  letter-spacing: -0.06em;
+  display: inline-block;
+  transition: font-variation-settings 1400ms cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+.rung-1x   .numeral { color: var(--ink); }
+.rung-10x  .numeral { color: var(--ink); }
+.rung-100x .numeral {
+  /* crescendo: oxblood + a more pronounced softening + heavier weight
+     combine to make the top rung read as a structural climax, without
+     a size bump that would overflow the grid column. */
+  color: var(--oxblood);
+  font-variation-settings: "SOFT" 70, "opsz" 144, "wght" 400;
+}
+
+.numeral.is-soft {
+  font-variation-settings: "SOFT" 100, "opsz" 144, "wght" 420;
+}
+
+.rung-100x .numeral.is-soft {
+  font-variation-settings: "SOFT" 100, "opsz" 144, "wght" 460;
+}
+
+.rung-body { min-width: 0; max-width: 38rem; }
+
+.rung-label {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  margin: 0 0 1rem;
+}
+
+.rung-heading {
+  font-family: var(--display);
+  font-weight: 380;
+  font-variation-settings: "SOFT" 50, "opsz" 96;
+  font-size: clamp(1.55rem, 2.5vw, 2.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  max-width: 22ch;
+}
+
+.rung-text {
+  font-size: var(--fs-lead);
+  line-height: 1.58;
+  color: var(--ink-dim);
+  margin: 0 0 1.5rem;
+  max-width: 42ch;
+}
+
+.rung-margin { max-width: 28ch; }
+
+/* How it works ----------------------------------------------------------- */
+.how-it-works .steps {
+  list-style: none;
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2.5rem);
+}
+
+.step {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.25rem;
+}
+
+.step-num {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  margin: 0 0 0.9rem;
+}
+
+.step-heading {
+  font-family: var(--display);
+  font-weight: 400;
+  font-variation-settings: "SOFT" 40, "opsz" 96;
+  font-size: 1.55rem;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.75rem;
+}
+
+.step-text {
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--ink-dim);
+  margin: 0;
+}
+
+/* Deliverables ----------------------------------------------------------- */
+.deliverable-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 3rem) clamp(2rem, 5vw, 4.5rem);
+}
+
+.deliverable {
+  display: grid;
+  grid-template-columns: 3.4rem 1fr;
+  gap: 0.25rem 1.2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+.deliverable-label {
+  grid-row: 1 / span 2;
+  font-family: var(--display);
+  font-variation-settings: "SOFT" 10, "opsz" 48;
+  font-weight: 440;
+  font-size: 2.3rem;
+  line-height: 0.9;
+  color: var(--oxblood);
+  margin: 0;
+}
+
+.deliverable-heading {
+  font-family: var(--display);
+  font-weight: 420;
+  font-variation-settings: "SOFT" 40, "opsz" 96;
+  font-size: 1.35rem;
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+  margin: 0 0 0.5rem;
+}
+
+.deliverable-text {
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--ink-dim);
+  margin: 0;
+}
+
+/* Oversight -------------------------------------------------------------- */
+.oversight {
+  background: var(--paper-soft);
+  border-block: 1px solid var(--rule);
+}
+
+.oversight-inner {
+  display: grid;
+  /* pullquote gets the wider left column; body gets the right.
+     eyebrow spans full width so it doesn't consume a grid cell
+     and accidentally displace the pullquote into the narrow column. */
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.oversight-eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+.pullquote {
+  margin: 0;
+}
+
+.pullquote p {
+  font-family: var(--display);
+  font-weight: 340;
+  font-variation-settings: "SOFT" 70, "opsz" 144;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.028em;
+  color: var(--ink);
+  margin: var(--space-2) 0 0;
+  max-width: 14ch;
+}
+
+.pullquote em {
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+  color: var(--oxblood);
+}
+
+.oversight-body {
+  font-size: var(--fs-lead);
+  line-height: 1.62;
+  color: var(--ink-dim);
+  max-width: 40ch;
+}
+
+.oversight-body p { margin: 0 0 1.1rem; }
+.oversight-body p:last-child { margin: 0; }
+
+/* Patterns --------------------------------------------------------------- */
+.patterns-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.patterns-text {
+  font-family: var(--display);
+  font-weight: 360;
+  font-variation-settings: "SOFT" 50, "opsz" 96;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  line-height: 1.38;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  max-width: 38ch;
+  margin: 0;
+}
+
+.patterns-margin {
+  align-self: end;
+  max-width: 24ch;
+}
+
+/* Fit -------------------------------------------------------------------- */
+.fit-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0;
+  border-block: 1px solid var(--rule);
+}
+
+.fit-col {
+  padding: var(--space-4) clamp(1.25rem, 3vw, 2.75rem);
+}
+
+.fit-col + .fit-col {
+  border-left: 1px solid var(--rule);
+}
+
+.fit-col-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  margin: 0 0 1.25rem;
+}
+
+.fit-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.fit-col li {
+  font-family: var(--display);
+  font-weight: 360;
+  font-variation-settings: "SOFT" 40, "opsz" 48;
+  font-size: 1.2rem;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.fit-col li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.55rem;
+  height: 1px;
+  background: var(--oxblood);
+}
+
+.fit-not li { color: var(--ink-dim); }
+.fit-not li::before { background: var(--ink-faint); }
+
+/* FAQ -------------------------------------------------------------------- */
+.faq-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.faq-item:last-child { border-bottom: 1px solid var(--rule); }
+
+.faq-item dt {
+  font-family: var(--display);
+  font-weight: 380;
+  font-variation-settings: "SOFT" 40, "opsz" 96;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.14;
+  letter-spacing: -0.012em;
+  margin: 0;
+}
+
+.faq-item dd {
+  margin: 0;
+  font-size: var(--fs-lead);
+  line-height: 1.58;
+  color: var(--ink-dim);
+  max-width: 42ch;
+}
+
+/* Closing ---------------------------------------------------------------- */
+.closing {
+  text-align: center;
+  padding-block: var(--space-7);
+}
+
+.closing-heading {
+  font-family: var(--display);
+  font-weight: 360;
+  font-variation-settings: "SOFT" 60, "opsz" 144;
+  font-size: clamp(2rem, 4.8vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0 auto;
+  max-width: 22ch;
+}
+
+.ecosystem {
+  margin-top: var(--space-4);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+}
+
+.ecosystem a {
+  color: var(--oxblood);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* Footer ----------------------------------------------------------------- */
+.footer {
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+
+/* .footer-inner also receives max-width / page gutter from the shared
+   page-frame rule near the top of this file. */
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+.footer-line,
+.footer-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Reduced motion --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  [data-reveal] { opacity: 1; transform: none; }
+  .numeral { font-variation-settings: "SOFT" 80, "opsz" 144, "wght" 400; }
+}
+
+/* Responsive ------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hero-note {
+    justify-self: start;
+    margin-top: var(--space-5);
+    max-width: 34ch;
+  }
+
+  .ladder .rung {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+  .numeral-wrap { justify-content: flex-start; }
+
+  .how-it-works .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .deliverable-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .oversight-inner,
+  .patterns-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .faq-item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  :root { --fs-numeral: clamp(5rem, 26vw, 9rem); }
+
+  .masthead-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .how-it-works .steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fit-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fit-col + .fit-col {
+    border-left: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .btn { padding: 0.9rem 1.1rem; font-size: 0.74rem; }
+}

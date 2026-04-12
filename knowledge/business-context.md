@@ -1,49 +1,117 @@
 # Business Context
 
 ## What the business is
-A premium concierge service that sets up and manages Personal AI Infrastructure for high-impact clients. The product is a combination of:
-- dedicated infrastructure
-- tailored workflows
-- ongoing maintenance
-- human oversight and support
+A premium concierge service that sets up and manages Personal AI Infrastructure for high-impact founders, executives, and creators.
 
-## Current stage
-Early but real.
-- multiple live installations
-- several paying or committed clients
-- strong qualitative proof from early adopters
-- demand exists, but operations need more systematization before scaling hard
+This is currently best understood as a high-touch service business with product potential, not a pure SaaS product.
 
-## Pricing references
-- setup fee: one-time, in the thousands
-- target monthly floor: **$10K/month**
-- upper-end vision: **$20K/month** for a fuller digital chief of staff layer
-- Ali reference structure included a lower upfront amount with deferred upside
-- broader range discussed in memory: roughly **$5K to $15K/month**, with clear intent to stay premium
+## What clients are actually paying for
+Clients are not just paying for AI access.
+They are paying for:
 
-## Economics
-- current LLM/infrastructure spend roughly **$2K to $3K/month** across the fleet
-- Nick’s own framing: 10 clients at $10K/month can become a meaningful high-six-figure to low-seven-figure lifestyle business
-- current ceiling looks like premium service business economics, unless productization expands leverage further
+- infrastructure
+- configuration
+- memory and context systems
+- workflow design
+- specialized agents
+- human oversight
+- ongoing refinement
+- access to the leading edge of what actually works
+- access to **Nick's ecosystem**, where tools, workflows, models, and operating patterns are being actively developed and refined
 
-## Best current traction signals
-- Ali is a paying proof case and major evangelist
-- Thomas uses his system independently and gets real value
-- prospects include high-status network contacts like Dave Asprey, Gunnar, Leila Martin, and EO-network style buyers
-- social proof already exists through network conversations and hands-on demos
+A meaningful part of the premium is that clients are not buying an off-the-shelf setup. They are buying into a living ecosystem shaped by Nick's experimentation, taste, and judgment.
 
-## Target customer profile
-- entrepreneurs with lots of unhandled inflow
-- operators with enough complexity to benefit from a chief-of-staff layer
-- clients who value privacy, customization, and access to leading-edge tooling
-- users who can tolerate some experimentation in exchange for dramatic leverage
+## The business model thesis
+The current model is:
 
-## Strategic business goals
-- systematize delivery and fleet operations
-- refine ideal client profile
-- package the offer clearly enough to sell without overexplaining
-- use premium service as the wedge, then decide whether broader productization follows
-- potentially build with a business/operator counterpart on process and implementation
+1. start with premium high-touch deployments
+2. learn repeatedly from real client environments
+3. identify common patterns
+4. later carve off productizable components
 
-## Why this exists now
-Because off-the-shelf AI tools still leave a gap between “chatbot” and “trusted operator.” This business fills that gap with setup, customization, supervision, and real workflow design.
+The service should not pretend to be more productized than it is.
+That honesty is part of the trust story.
+
+## Ideal customer profile
+Best-fit clients tend to be:
+
+- ambitious founders and CEOs
+- high-agency operators with many parallel workstreams
+- people with enough complexity that ordinary tools break down
+- people who value leverage, speed, context, and discretion
+- buyers willing to pay for judgment, not just tooling
+
+## Commercial shape
+The service is trending toward premium pricing, with discussions and examples pointing roughly toward:
+
+- setup / onboarding fees where appropriate
+- monthly engagement in a premium range
+- higher tiers for more customized support, workflow design, and oversight
+
+Public pricing language should stay careful until packaging is finalized.
+
+## Why this business exists
+Most people are getting one of two bad options:
+
+- raw AI tools that are powerful but brittle
+- generic automation help that does not understand their real life, work, or judgment layer
+
+This business exists to bridge that gap.
+
+It also exists because the best current AI outcomes often come from being embedded in the right ecosystem: the right models, workflows, memory patterns, review layers, and operating practices. That ecosystem component is part of the offer.
+
+## Key strategic insight
+The winning offer is not just “AI for business.”
+It is closer to:
+
+**a trusted operating layer for a principal who already has real complexity and wants multiplicative leverage**
+
+## Why the service is premium
+The premium comes from:
+
+- depth of customization
+- sensitivity of client context
+- the need for taste and judgment
+- the need for trust
+- staying current as models, tools, and workflows change
+- the presence of a human review layer where it matters
+- direct connection to a curated ecosystem rather than a static implementation
+
+## Current traction patterns
+The strongest signals so far include:
+
+- clients becoming deeply engaged once the system is configured well
+- expansion from one assistant into multiple specialized agents
+- willingness to pay premium pricing for white-glove support
+- client enthusiasm around memory, content, operations, and follow-through use cases
+- growing clarity that the service works best when paired with strong delegation habits
+
+## Strategic boundaries
+Important current boundaries:
+
+- do not oversell autonomy
+- do not imply full replacement of trusted humans
+- do not lead with departmental deployments as the main wedge
+- start with the principal, then expand outward if useful
+- do not hand-wave security, trust, or privacy concerns, address them directly and calmly
+
+## Organizational insight
+A recurring theme is that this business likely wants a mix of:
+
+- technical infrastructure leadership
+- workflow / operating design
+- human oversight and QA
+- client-facing support and implementation
+
+That mix is part of the moat.
+
+## Long-term vision
+The long-term vision is not just task automation.
+It is helping exceptional people:
+
+- think more clearly
+- hold more complexity
+- execute more ideas
+- build and move at a pace that used to require much larger teams
+
+That is the bridge from 1x to 10x to 100x.

@@ -1,30 +1,77 @@
 # Known Constraints
 
 ## Product constraints
-- current AI still makes mistakes, especially around nuance, long instructions, and edge cases
-- reliability is good enough for useful work, not good enough for blind trust
-- some integrations are safer as read-only
-- speech/transcript systems can misattribute speakers and commitments
+- current AI still makes mistakes, especially around nuance, sequencing, and edge cases
+- trust drops fast when AI takes high-risk actions without review
+- long rule lists do not always produce reliable instruction-following
+- scheduling, communications, and socially complex decisions often need extra care
+- high-quality deployments are still customized and high-touch
 
-## Delivery constraints
-- Nick is still a bottleneck in setup, support, and trust repair
-- white-glove service creates high expectations for responsiveness
-- scaling past a handful of premium clients requires stronger ops, automation, and possibly people
-
-## Security and trust constraints
-- client systems may contain highly sensitive data
-- cloud-hosted environments introduce trust concerns for some clients
-- financial actions and other high-risk writes should remain carefully constrained
-- site copy should never imply unsupervised access to sensitive systems
+## Strategic constraints
+- do not market this as fully autonomous AI
+- do not imply the service replaces trusted human assistants in one move
+- do not oversell certainty around security or compliance claims
+- do not collapse the business into generic “AI automation” language
+- do not pretend the current offer is a pure software product
 
 ## Messaging constraints
-- do not oversell replacement of human assistants
-- do not promise perfect reliability
-- do not imply every prospect is a fit
-- do not make this sound like cheap software or a commodity AI wrapper
-- be careful with legal/security claims unless directly supported and scoped
+Public language should avoid:
 
-## Business constraints
-- current business likely tops out as a premium service unless productized further
-- margins depend on infrastructure costs, support intensity, and how much human review is still required
-- ideal client selection matters a lot; bad-fit clients could consume support and produce weak outcomes
+- “set it and forget it”
+- “replace your team”
+- “fully autonomous”
+- vague AI buzzword soup
+- overly technical implementation detail on the main site
+
+Public language should emphasize:
+
+- human oversight
+- tailored deployment
+- clarity and leverage
+- memory and context
+- better prioritization and follow-through
+- premium support around real complexity
+- thoughtful treatment of security and privacy
+
+## Trust constraints
+A core truth behind the product is that current AI can behave like a very smart but inconsistent intern.
+
+That insight should shape the system design, even if the public site says it more elegantly.
+
+Public translation:
+
+- AI moves fast
+- humans supervise what matters
+- reliability comes from the architecture, not blind trust
+- security and privacy are handled as design decisions, not afterthoughts
+
+## Security messaging guidance
+The site should address security directly enough to build trust, without making brittle promises.
+
+Good themes:
+
+- architecture choices depend on the sensitivity of the client workflow
+- approvals and review reduce risk on high-stakes actions
+- memory, channels, and integrations are configured intentionally rather than casually connected
+- discretion, boundaries, and judgment are part of the service
+
+Avoid:
+
+- blanket claims that everything is perfectly secure
+- compliance language you cannot fully substantiate
+- technical over-detail on the homepage
+
+## Packaging constraints
+- pricing language should stay directional until final packaging is approved
+- named client examples should not be public without explicit permission
+- case-study material should remain anonymized unless approved
+- avoid committing PII, private client context, or internal operating details into the public project repo
+
+## Build constraints for Claude Code
+When building the site:
+
+- prefer premium, clear, concrete language
+- treat FAQ and objections as first-class, not an afterthought
+- keep the site principal-focused, not department-first
+- make trust and oversight visible without sounding defensive
+- preserve room for the offer to evolve as the business matures
