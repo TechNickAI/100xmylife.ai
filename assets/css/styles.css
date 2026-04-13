@@ -171,6 +171,9 @@ section {
 .deliverable-list,
 .oversight-inner,
 .patterns-grid,
+.pillar-grid,
+.integration-grid,
+.builder-grid,
 .fit-columns,
 .faq-list,
 .closing-inner,
@@ -204,7 +207,8 @@ section + section {
 .hero-grid,
 .ladder > article,
 .oversight-inner,
-.patterns-grid {
+.patterns-grid,
+.builder-grid {
   padding-left: max(var(--page-gutter), 10%);
 }
 
@@ -724,9 +728,109 @@ section + section {
   margin: 0.75rem auto 0;
 }
 
-/* Knowledge base --------------------------------------------------------- */
-.knowledge-base .patterns-margin {
-  grid-column: 2;
+/* PAI Pillars ------------------------------------------------------------ */
+.section-intro {
+  font-size: var(--fs-sub);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ink-dim);
+  max-width: 50ch;
+  margin: var(--space-3) auto 0;
+}
+
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2.5rem);
+}
+
+.pillar {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.25rem;
+}
+
+.pillar-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin: 0 0 0.75rem;
+}
+
+.pillar-text {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--ink-dim);
+  margin: 0;
+}
+
+/* Connected Systems ------------------------------------------------------ */
+.integration-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2.5rem);
+}
+
+.integration-item {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.25rem;
+}
+
+.integration-name {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin: 0 0 0.75rem;
+}
+
+.integration-desc {
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--ink-dim);
+  margin: 0;
+}
+
+/* Builder (Nick) --------------------------------------------------------- */
+.builder-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.builder-text {
+  font-size: var(--fs-lead);
+  font-weight: 300;
+  line-height: 1.62;
+  color: var(--ink-dim);
+  max-width: 40ch;
+}
+
+.builder-text p {
+  margin: 0 0 1.1rem;
+}
+
+.builder-text p:last-child {
+  margin: 0;
+}
+
+.builder-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  font-weight: 400;
+}
+
+.builder-aside {
+  align-self: center;
 }
 
 /* Oversight -------------------------------------------------------------- */
@@ -959,6 +1063,21 @@ section + section {
   text-transform: uppercase;
 }
 
+.footer-line a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* FAQ link styling */
+.faq-item dd a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
 /* Reduced motion --------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -1003,8 +1122,17 @@ section + section {
   }
 
   .oversight-inner,
-  .patterns-grid {
+  .patterns-grid,
+  .builder-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pillar-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .integration-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .faq-item {
@@ -1016,7 +1144,8 @@ section + section {
   .hero-grid,
   .ladder > article,
   .oversight-inner,
-  .patterns-grid {
+  .patterns-grid,
+  .builder-grid {
     padding-left: var(--page-gutter);
   }
 }
@@ -1033,6 +1162,11 @@ section + section {
   }
 
   .how-it-works .steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pillar-grid,
+  .integration-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 

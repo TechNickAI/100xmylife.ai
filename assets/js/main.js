@@ -74,7 +74,10 @@
   };
 
   function calc(a, b, c) {
-    return (a / 100) * (b / 100) * (c / 100) * 100;
+    var eff = 1 + a / 100;
+    var cap = 1 + (b / 100) * 4;
+    var cre = 1 + (c / 100) * 9;
+    return eff * cap * cre;
   }
 
   function fmt(n) {
@@ -83,8 +86,8 @@
   }
 
   function resultColor(total) {
-    if (total >= 70) return "var(--accent)";
-    if (total >= 30) return "var(--ink)";
+    if (total >= 60) return "var(--accent)";
+    if (total >= 15) return "var(--ink)";
     return "var(--ink-dim)";
   }
 
@@ -97,11 +100,11 @@
   }
 
   function getNarrative(a, b, c, total) {
-    if (total >= 70)
+    if (total >= 60)
       return "All three layers compounding. This is the compass at full north. The arc plays out over years \u2014 and the magnification is real.";
-    if (total >= 30)
+    if (total >= 25)
       return "Strong across the board. The compounding is visible \u2014 what took weeks now takes days.";
-    if (total >= 10)
+    if (total >= 8)
       return "Solid foundation, meaningful leverage. Room to grow and the direction is clear.";
     var min = Math.min(a, b, c);
     var weak = min === a ? "Efficiency" : min === b ? "Capacity" : "Creativity";
