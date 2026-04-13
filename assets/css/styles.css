@@ -15,6 +15,11 @@
   --rule: rgba(21, 19, 14, 0.22);
   --rule-soft: rgba(21, 19, 14, 0.1);
 
+  /* Layer accent colors */
+  --color-1x: #6b5b3e;
+  --color-10x: #2d6a4f;
+  --color-100x: #a83919;
+
   /* Typography */
   --display: "Fraunces", "Times New Roman", Georgia, serif;
   --body: "Instrument Sans", -apple-system, system-ui, sans-serif;
@@ -637,6 +642,168 @@ section + section {
 
 .deliverable:last-child:nth-child(odd) {
   grid-column: 1 / -1;
+}
+
+/* Dashboard (interactive multiplier) ------------------------------------- */
+.dashboard-stats {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-card {
+  background: var(--paper-soft);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid var(--rule-soft);
+  text-align: center;
+}
+
+.dashboard-gauge-wrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+}
+
+.dashboard-gauge-wrap svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard-gauge-bg {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 8;
+}
+
+.dashboard-gauge-fill {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.4s ease;
+}
+
+.dashboard-gauge-text {
+  font-family: var(--display);
+  font-weight: 300;
+  dominant-baseline: central;
+  text-anchor: middle;
+}
+
+.dashboard-layer-name {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-tagline {
+  font-family: var(--display);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  min-height: 1.5em;
+  margin-bottom: 0.75rem;
+}
+
+.dashboard-slider {
+  margin-bottom: 1rem;
+}
+
+.dashboard-slider input[type="range"] {
+  cursor: pointer;
+}
+
+.dashboard-card[data-layer="a"] input[type="range"] {
+  accent-color: var(--color-1x);
+}
+
+.dashboard-card[data-layer="b"] input[type="range"] {
+  accent-color: var(--color-10x);
+}
+
+.dashboard-card[data-layer="c"] input[type="range"] {
+  accent-color: var(--color-100x);
+}
+
+.dashboard-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.dashboard-bullets li {
+  font-size: 0.8125rem;
+  padding: 0.3rem 0;
+  color: var(--ink-faint);
+  transition: color 0.3s ease;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.dashboard-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rule-soft);
+  transition: background 0.3s ease;
+}
+
+.dashboard-bullets li.active {
+  color: var(--ink);
+}
+
+.dashboard-bullets li.active::before {
+  background: currentColor;
+}
+
+.dashboard-output {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+.dashboard-output-box {
+  background: var(--paper-soft);
+  border-radius: 8px;
+  padding: 2rem;
+  border: 1px solid var(--rule-soft);
+  text-align: center;
+}
+
+.dashboard-result {
+  font-family: var(--display);
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 300;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.dashboard-result-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0.5rem 0 0;
+}
+
+.dashboard-narrative {
+  font-size: 0.9375rem;
+  color: var(--ink-dim);
+  max-width: 50ch;
+  margin: 0.75rem auto 0;
 }
 
 /* Knowledge base --------------------------------------------------------- */

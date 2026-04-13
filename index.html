@@ -272,6 +272,179 @@
         </article>
       </section>
 
+      <section class="dashboard" aria-labelledby="dashboard-heading">
+        <div class="section-head">
+          <p class="eyebrow">Interactive</p>
+          <h2 id="dashboard-heading" class="section-heading">
+            See how the layers compound.
+          </h2>
+        </div>
+
+        <div class="dashboard-stats" id="dashboard-stats">
+          <div class="dashboard-card" data-layer="a">
+            <div class="dashboard-gauge-wrap">
+              <svg viewBox="0 0 120 120">
+                <circle class="dashboard-gauge-bg" cx="60" cy="60" r="50" />
+                <circle
+                  class="dashboard-gauge-fill"
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  stroke="var(--color-1x)"
+                  stroke-dasharray="314.16"
+                  stroke-dashoffset="157.08"
+                  transform="rotate(-90 60 60)"
+                />
+                <text
+                  class="dashboard-gauge-text"
+                  x="60"
+                  y="60"
+                  font-size="22"
+                  fill="var(--ink)"
+                >
+                  50%
+                </text>
+              </svg>
+            </div>
+            <p class="dashboard-layer-name" style="color: var(--color-1x)">
+              Efficiency
+            </p>
+            <p class="dashboard-tagline">Finding the floor.</p>
+            <div class="dashboard-slider">
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value="50"
+                style="width: 100%"
+              />
+            </div>
+            <ul class="dashboard-bullets">
+              <li class="active" data-thresh="15">
+                Context has a reliable home
+              </li>
+              <li class="active" data-thresh="35">
+                Biggest domino is always visible
+              </li>
+              <li data-thresh="55">Cognitive load drops</li>
+              <li data-thresh="75">Stop dropping things</li>
+              <li data-thresh="90">Full creative capacity</li>
+            </ul>
+          </div>
+
+          <div class="dashboard-card" data-layer="b">
+            <div class="dashboard-gauge-wrap">
+              <svg viewBox="0 0 120 120">
+                <circle class="dashboard-gauge-bg" cx="60" cy="60" r="50" />
+                <circle
+                  class="dashboard-gauge-fill"
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  stroke="var(--color-10x)"
+                  stroke-dasharray="314.16"
+                  stroke-dashoffset="157.08"
+                  transform="rotate(-90 60 60)"
+                />
+                <text
+                  class="dashboard-gauge-text"
+                  x="60"
+                  y="60"
+                  font-size="22"
+                  fill="var(--ink)"
+                >
+                  50%
+                </text>
+              </svg>
+            </div>
+            <p class="dashboard-layer-name" style="color: var(--color-10x)">
+              Capacity
+            </p>
+            <p class="dashboard-tagline">Small team.</p>
+            <div class="dashboard-slider">
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value="50"
+                style="width: 100%"
+              />
+            </div>
+            <ul class="dashboard-bullets">
+              <li class="active" data-thresh="15">
+                Research agents investigating
+              </li>
+              <li class="active" data-thresh="35">
+                Scheduled work in background
+              </li>
+              <li data-thresh="55">Integrations across real tools</li>
+              <li data-thresh="75">Delegation actually works</li>
+              <li data-thresh="90">Full parallel execution</li>
+            </ul>
+          </div>
+
+          <div class="dashboard-card" data-layer="c">
+            <div class="dashboard-gauge-wrap">
+              <svg viewBox="0 0 120 120">
+                <circle class="dashboard-gauge-bg" cx="60" cy="60" r="50" />
+                <circle
+                  class="dashboard-gauge-fill"
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  stroke="var(--color-100x)"
+                  stroke-dasharray="314.16"
+                  stroke-dashoffset="157.08"
+                  transform="rotate(-90 60 60)"
+                />
+                <text
+                  class="dashboard-gauge-text"
+                  x="60"
+                  y="60"
+                  font-size="22"
+                  fill="var(--ink)"
+                >
+                  50%
+                </text>
+              </svg>
+            </div>
+            <p class="dashboard-layer-name" style="color: var(--color-100x)">
+              Creativity
+            </p>
+            <p class="dashboard-tagline">Faster loops.</p>
+            <div class="dashboard-slider">
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value="50"
+                style="width: 100%"
+              />
+            </div>
+            <ul class="dashboard-bullets">
+              <li class="active" data-thresh="15">Rapid prototyping</li>
+              <li class="active" data-thresh="35">
+                Overnight drafts and research
+              </li>
+              <li data-thresh="55">Concrete options from rough ideas</li>
+              <li data-thresh="75">One-line instruction → shipped artifact</li>
+              <li data-thresh="90">Execution partnership</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="dashboard-output">
+          <div class="dashboard-output-box">
+            <div class="dashboard-result" id="dashboard-result">13×</div>
+            <p class="dashboard-result-label">your multiplier</p>
+            <p class="dashboard-narrative" id="dashboard-narrative">
+              Solid foundation, meaningful leverage. Room to grow and the
+              direction is clear.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section class="knowledge-base" aria-labelledby="kb-heading">
         <div class="oversight-inner">
           <p id="kb-heading" class="eyebrow oversight-eyebrow">
