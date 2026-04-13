@@ -9,4 +9,4 @@ build/
 .tmp/
 coverage/
 *.log
-_site/
+.playwright-mcp/
