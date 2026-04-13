@@ -774,6 +774,140 @@
         padding-top: 1rem;
       }
 
+      /* ================================================================
+         THEME 6: NOCTURNE
+         Dark Luxury palette + Quiet Elegance layout.
+         Cormorant Garamond 400 + DM Sans 400 on obsidian.
+         Asymmetric. Literary. A private study at night.
+         ================================================================ */
+      .theme-nocturne {
+        --bg: #0c0c0c;
+        --text: #c8b898;
+        --text-dim: #9a8b72;
+        --text-faint: #5e5445;
+        --accent: #c5a55a;
+        --rule: rgba(197, 165, 90, 0.08);
+        --heading-font: "Cormorant Garamond", serif;
+        --body-font: "DM Sans", sans-serif;
+        --mono-font: "JetBrains Mono", monospace;
+        --heading-weight: 400;
+        --heading-tracking: 0.005em;
+        --headline-size: clamp(2.4rem, 5.5vw, 4.5rem);
+        --headline-lh: 1.08;
+        --headline-max: 18ch;
+        --radius: 0;
+        --eyebrow-tracking: 0.22em;
+        --quote-weight: 300;
+        --feature-num-size: 2.2rem;
+        --feature-num-weight: 300;
+        --page-max: 62rem;
+        --btn-primary-text: #0c0c0c;
+      }
+
+      .theme-nocturne .preview-header {
+        border-bottom: none;
+        padding-bottom: 2.5rem;
+      }
+
+      .theme-nocturne .preview-brand {
+        font-weight: 400;
+        font-size: 1.25rem;
+        letter-spacing: 0.01em;
+      }
+
+      .theme-nocturne .preview-hero {
+        padding: 7rem clamp(1.25rem, 4vw, 3rem) 6rem;
+        padding-left: max(clamp(1.25rem, 4vw, 3rem), 12%);
+      }
+
+      .theme-nocturne .preview-subtext {
+        font-weight: 400;
+        font-size: 1rem;
+        max-width: 36ch;
+      }
+
+      .theme-nocturne .preview-eyebrow {
+        letter-spacing: 0.22em;
+      }
+
+      .theme-nocturne .preview-btn {
+        font-family: var(--body-font);
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        font-size: 0.72rem;
+        border-color: rgba(197, 165, 90, 0.25);
+        color: var(--text-dim);
+      }
+
+      .theme-nocturne .preview-btn-primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--bg);
+      }
+
+      .theme-nocturne .preview-btn-primary:hover {
+        opacity: 0.85;
+      }
+
+      .theme-nocturne .preview-btn-ghost:hover {
+        background: var(--accent);
+        color: var(--bg);
+        border-color: var(--accent);
+      }
+
+      .theme-nocturne .preview-features {
+        padding-left: max(clamp(1.25rem, 4vw, 3rem), 12%);
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .theme-nocturne .preview-section-heading {
+        margin-bottom: 3.5rem;
+      }
+
+      .theme-nocturne .preview-feature-grid {
+        gap: 4rem;
+      }
+
+      .theme-nocturne .preview-feature {
+        border-top: 1px solid rgba(197, 165, 90, 0.06);
+        padding-top: 2rem;
+      }
+
+      .theme-nocturne .preview-feature-num {
+        color: var(--accent);
+        font-weight: 300;
+      }
+
+      .theme-nocturne .preview-feature h3 {
+        font-weight: 400;
+        font-size: 1.15rem;
+        color: var(--text);
+      }
+
+      .theme-nocturne .preview-feature p {
+        font-weight: 400;
+        font-size: 0.92rem;
+      }
+
+      .theme-nocturne .preview-quote-section {
+        padding: 6rem clamp(1.25rem, 4vw, 3rem);
+        padding-left: max(clamp(1.25rem, 4vw, 3rem), 12%);
+        border-top: none;
+      }
+
+      .theme-nocturne .preview-quote p {
+        font-weight: 300;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        max-width: 20ch;
+        line-height: 1.12;
+      }
+
+      .theme-nocturne .preview-footer {
+        border-top: 1px solid rgba(197, 165, 90, 0.06);
+        padding-top: 2rem;
+      }
+
       /* Responsive ----------------------------------------------------- */
       @media (max-width: 960px) {
         .preview-feature-grid {
@@ -783,7 +917,10 @@
 
         .theme-wabi .preview-hero,
         .theme-wabi .preview-features,
-        .theme-wabi .preview-quote-section {
+        .theme-wabi .preview-quote-section,
+        .theme-nocturne .preview-hero,
+        .theme-nocturne .preview-features,
+        .theme-nocturne .preview-quote-section {
           padding-left: clamp(1.25rem, 4vw, 3rem);
         }
       }
@@ -843,6 +980,7 @@
       <button class="theme-btn" data-theme="brutalist">Raw Brutalist</button>
       <button class="theme-btn" data-theme="wabi">Quiet Elegance</button>
       <button class="theme-btn" data-theme="warm">Warm Modern</button>
+      <button class="theme-btn" data-theme="nocturne">Nocturne</button>
     </nav>
 
     <div class="theme-info">
@@ -953,6 +1091,10 @@
           warm: {
             fonts: "Plus Jakarta Sans 700 / 400",
             mood: "Apple meets Aesop. Friendly luxury.",
+          },
+          nocturne: {
+            fonts: "Cormorant Garamond 400 + DM Sans 400",
+            mood: "Dark luxury meets literary restraint. A private study at night.",
           },
         };
 
