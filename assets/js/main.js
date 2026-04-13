@@ -86,8 +86,8 @@
   }
 
   function resultColor(total) {
-    if (total >= 60) return "var(--accent)";
-    if (total >= 15) return "var(--ink)";
+    if (total >= 50) return "var(--accent)";
+    if (total >= 12) return "var(--ink)";
     return "var(--ink-dim)";
   }
 
@@ -100,15 +100,15 @@
   }
 
   function getNarrative(a, b, c, total) {
-    if (total >= 60)
+    if (total >= 50)
       return "All three layers compounding. This is the compass at full north. The arc plays out over years \u2014 and the magnification is real.";
-    if (total >= 25)
+    if (total >= 20)
       return "Strong across the board. The compounding is visible \u2014 what took weeks now takes days.";
-    if (total >= 8)
+    if (total >= 6)
       return "Solid foundation, meaningful leverage. Room to grow and the direction is clear.";
     var min = Math.min(a, b, c);
     var weak = min === a ? "Efficiency" : min === b ? "Capacity" : "Creativity";
-    if (total >= 3)
+    if (total >= 2.5)
       return (
         weak +
         " is the bottleneck at " +
