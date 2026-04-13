@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 · 100xmylife.ai</title>
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#f7f5f0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --paper: #f7f5f0;
+        --ink: #2c2c2c;
+        --ink-dim: #5a5a5a;
+        --ink-faint: #8a8a8a;
+        --accent: #3d4f7c;
+        --accent-deep: #2a3557;
+        --rule: rgba(0, 0, 0, 0.06);
+        --display: "Source Serif 4", Georgia, serif;
+        --body: "DM Sans", -apple-system, system-ui, sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: var(--body);
+        font-weight: 300;
+        font-size: 1.0625rem;
+        line-height: 1.55;
+        background: var(--paper);
+        color: var(--ink);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 36rem;
+        padding-left: max(1.25rem, 10%);
+      }
+
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        margin: 0 0 1.75rem;
+      }
+
+      h1 {
+        font-family: var(--display);
+        font-weight: 400;
+        font-size: clamp(2.2rem, 5vw, 4.2rem);
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+        margin: 0 0 1.5rem;
+        max-width: 16ch;
+      }
+
+      p {
+        color: var(--ink-dim);
+        max-width: 38ch;
+        margin: 0 0 2.5rem;
+      }
+
+      a {
+        font-family: var(--body);
+        font-size: 0.75rem;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--paper);
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        padding: 1rem 1.3rem;
+        display: inline-flex;
+        align-items: center;
+        transition:
+          transform 200ms ease,
+          background 200ms ease,
+          border-color 200ms ease,
+          box-shadow 200ms ease;
+      }
+
+      a:hover {
+        background: var(--accent-deep);
+        border-color: var(--accent-deep);
+        transform: translateY(-1px);
+        box-shadow: 0 10px 28px -16px rgba(42, 53, 87, 0.45);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p class="eyebrow">404</p>
+      <h1>This page does not exist.</h1>
+      <p>
+        The URL you followed has either moved or was never here. Nothing to
+        worry about.
+      </p>
+      <a href="/">Back to the beginning</a>
+    </div>
+  </body>
+</html>

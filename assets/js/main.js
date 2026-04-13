@@ -83,7 +83,7 @@
   }
 
   function resultColor(total) {
-    if (total >= 70) return "var(--oxblood)";
+    if (total >= 70) return "var(--accent)";
     if (total >= 30) return "var(--ink)";
     return "var(--ink-dim)";
   }

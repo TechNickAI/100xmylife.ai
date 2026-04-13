@@ -1,28 +1,28 @@
 /* =========================================================================
-   100xmylife.ai — editorial parchment
+   100xmylife.ai — quiet elegance
    ========================================================================= */
 
 /* Design tokens ---------------------------------------------------------- */
 :root {
-  /* Palette: warm parchment, dark ink, oxblood accent */
-  --paper: #f3ebdd;
-  --paper-soft: #ece2d0;
-  --ink: #15130e;
-  --ink-dim: #4a4238;
-  --ink-faint: #8a7c6a;
-  --oxblood: #a83919;
-  --oxblood-deep: #7a2710;
-  --rule: rgba(21, 19, 14, 0.22);
-  --rule-soft: rgba(21, 19, 14, 0.1);
+  /* Palette: cool off-white, soft ink, indigo accent */
+  --paper: #f7f5f0;
+  --paper-soft: #efece6;
+  --ink: #2c2c2c;
+  --ink-dim: #5a5a5a;
+  --ink-faint: #8a8a8a;
+  --accent: #3d4f7c;
+  --accent-deep: #2a3557;
+  --rule: rgba(0, 0, 0, 0.06);
+  --rule-soft: rgba(0, 0, 0, 0.03);
 
   /* Layer accent colors */
-  --color-1x: #6b5b3e;
-  --color-10x: #2d6a4f;
-  --color-100x: #a83919;
+  --color-1x: #8a7e6d;
+  --color-10x: #5a6b7c;
+  --color-100x: #3d4f7c;
 
   /* Typography */
-  --display: "Fraunces", "Times New Roman", Georgia, serif;
-  --body: "Instrument Sans", -apple-system, system-ui, sans-serif;
+  --display: "Source Serif 4", Georgia, serif;
+  --body: "DM Sans", -apple-system, system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Scale */
@@ -31,9 +31,7 @@
   --fs-lead: 1.1875rem;
   --fs-sub: clamp(1.125rem, 1.3vw, 1.375rem);
   --fs-heading: clamp(1.9rem, 3.4vw, 3.1rem);
-  --fs-display: clamp(2.6rem, 6.3vw, 5.6rem);
-  /* upper clamp sized so the 4-glyph "100×" fits inside the numeral column
-     at the widest layout, with comfortable room on either side */
+  --fs-display: clamp(2.2rem, 5vw, 4.2rem);
   --fs-numeral: clamp(6rem, 18vw, 13rem);
 
   /* Spacing (vertical rhythm) */
@@ -46,7 +44,7 @@
 
   /* Page frame */
   --page-gutter: clamp(1.25rem, 4vw, 3.5rem);
-  --page-max: 72rem;
+  --page-max: 60rem;
 }
 
 /* Reset ------------------------------------------------------------------ */
@@ -84,61 +82,12 @@ html {
 body {
   font-family: var(--body);
   font-size: var(--fs-body);
+  font-weight: 300;
   line-height: 1.55;
-  background:
-    radial-gradient(
-      1200px 800px at 85% -10%,
-      rgba(168, 57, 25, 0.05),
-      transparent 60%
-    ),
-    radial-gradient(
-      1400px 900px at -10% 20%,
-      rgba(21, 19, 14, 0.045),
-      transparent 55%
-    ),
-    var(--paper);
-  /* Subtle paper grain via layered gradients */
+  background: var(--paper);
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-}
-
-body::before {
-  /* fiber texture: faint speckle using crossed radial gradients.
-     Prime tile sizes > 31px dither the repeat so banding stays invisible. */
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.2;
-  mix-blend-mode: multiply;
-  background-image:
-    radial-gradient(
-      circle at 13% 22%,
-      rgba(21, 19, 14, 0.04) 0 1px,
-      transparent 1.5px
-    ),
-    radial-gradient(
-      circle at 67% 54%,
-      rgba(21, 19, 14, 0.035) 0 1px,
-      transparent 1.5px
-    ),
-    radial-gradient(
-      circle at 88% 83%,
-      rgba(21, 19, 14, 0.04) 0 1px,
-      transparent 1.5px
-    ),
-    radial-gradient(
-      circle at 42% 78%,
-      rgba(21, 19, 14, 0.03) 0 1px,
-      transparent 1.5px
-    );
-  background-size:
-    37px 37px,
-    43px 43px,
-    53px 53px,
-    61px 61px;
-  z-index: 0;
 }
 
 main,
@@ -152,57 +101,41 @@ section {
 /* Typography primitives -------------------------------------------------- */
 .display {
   font-family: var(--display);
-  font-weight: 420;
-  font-optical-sizing: auto;
-  font-variation-settings:
-    "SOFT" 30,
-    "opsz" 144;
+  font-weight: 400;
   font-size: var(--fs-display);
-  line-height: 0.98;
-  letter-spacing: -0.028em;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0;
-  max-width: 14ch;
-  /* modern-browser orphan fix: lets the browser rebalance lines so no
-     single word (e.g., "run.") gets stranded on its own. */
+  max-width: 20ch;
   text-wrap: balance;
 }
 
 .display em {
   font-style: italic;
-  font-variation-settings:
-    "SOFT" 80,
-    "opsz" 144;
-  color: var(--oxblood);
+  color: var(--accent);
 }
 
 .section-heading {
   font-family: var(--display);
-  font-weight: 380;
-  font-optical-sizing: auto;
-  font-variation-settings:
-    "SOFT" 40,
-    "opsz" 96;
+  font-weight: 400;
   font-size: var(--fs-heading);
-  line-height: 1.02;
-  letter-spacing: -0.022em;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   margin: 0;
   max-width: 26ch;
 }
 
 .section-heading em {
   font-style: italic;
-  font-variation-settings:
-    "SOFT" 100,
-    "opsz" 96;
-  color: var(--oxblood);
+  color: var(--accent);
 }
 
 .eyebrow {
   font-family: var(--mono);
   font-size: var(--fs-eyebrow);
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink-faint);
   margin: 0 0 var(--space-3);
@@ -225,7 +158,7 @@ section {
   font-size: 0.65rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--oxblood);
+  color: var(--accent);
   margin-bottom: 0.35rem;
 }
 
@@ -267,6 +200,14 @@ section + section {
   border-top: 1px solid var(--rule-soft);
 }
 
+/* Asymmetric left offset for text-heavy sections */
+.hero-grid,
+.ladder > article,
+.oversight-inner,
+.patterns-grid {
+  padding-left: max(var(--page-gutter), 10%);
+}
+
 /* Masthead --------------------------------------------------------------- */
 .masthead {
   padding-top: 1.5rem;
@@ -288,24 +229,18 @@ section + section {
 
 .marque-num {
   font-family: var(--display);
-  font-weight: 520;
-  font-variation-settings:
-    "SOFT" 20,
-    "opsz" 96;
+  font-weight: 600;
   font-size: 1.55rem;
-  color: var(--oxblood);
+  color: var(--accent);
   letter-spacing: -0.03em;
 }
 
 .marque-word {
   font-family: var(--display);
-  font-weight: 340;
-  font-variation-settings:
-    "SOFT" 60,
-    "opsz" 96;
-  font-size: 1.35rem;
+  font-weight: 400;
+  font-size: 1.2rem;
   color: var(--ink);
-  letter-spacing: -0.015em;
+  letter-spacing: 0.01em;
 }
 
 .primary-nav {
@@ -323,22 +258,25 @@ section + section {
 }
 
 .nav-cta {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-family: var(--body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--ink);
+  color: var(--ink-dim);
   padding: 0.55rem 0.95rem;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--ink-faint);
   transition:
     background 180ms ease,
-    color 180ms ease;
+    color 180ms ease,
+    border-color 180ms ease;
 }
 
 .nav-cta:hover {
-  background: var(--ink);
+  background: var(--accent);
   color: var(--paper);
+  border-color: var(--accent);
 }
 
 .masthead-rule {
@@ -351,7 +289,7 @@ section + section {
 
 /* Hero ------------------------------------------------------------------- */
 .hero {
-  padding-top: var(--space-6);
+  padding-top: var(--space-7);
   padding-bottom: var(--space-7);
 }
 
@@ -368,9 +306,10 @@ section + section {
 
 .hero-sub {
   font-size: var(--fs-sub);
+  font-weight: 300;
   line-height: 1.5;
   color: var(--ink-dim);
-  max-width: 42ch;
+  max-width: 38ch;
   margin: var(--space-4) 0 var(--space-4);
 }
 
@@ -393,44 +332,47 @@ section + section {
 }
 
 .btn {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
+  font-family: var(--body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   padding: 1rem 1.3rem;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--ink-faint);
   transition:
     transform 200ms ease,
     background 200ms ease,
     color 200ms ease,
+    border-color 200ms ease,
     box-shadow 200ms ease;
 }
 
 .btn-primary {
-  background: var(--oxblood);
-  border-color: var(--oxblood);
+  background: var(--accent);
+  border-color: var(--accent);
   color: var(--paper);
-  box-shadow: 0 0 0 0 rgba(168, 57, 25, 0);
+  box-shadow: 0 0 0 0 rgba(61, 79, 124, 0);
 }
 
 .btn-primary:hover {
-  background: var(--oxblood-deep);
-  border-color: var(--oxblood-deep);
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
   transform: translateY(-1px);
-  box-shadow: 0 10px 28px -16px rgba(122, 39, 16, 0.55);
+  box-shadow: 0 10px 28px -16px rgba(42, 53, 87, 0.45);
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--ink);
+  color: var(--ink-dim);
 }
 
 .btn-ghost:hover {
   background: var(--ink);
   color: var(--paper);
+  border-color: var(--ink);
   transform: translateY(-1px);
 }
 
@@ -441,8 +383,6 @@ section + section {
 
 .ladder .rung {
   display: grid;
-  /* numeral column gets 1.15fr to comfortably hold the 4-glyph "100×"
-     at widest breakpoints without overflow into the body column */
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 4rem);
   align-items: start;
@@ -467,19 +407,15 @@ section + section {
 .numeral {
   font-family: var(--display);
   font-size: var(--fs-numeral);
-  font-weight: 360;
-  font-optical-sizing: auto;
-  /* starts with subtle softness so mid-scroll visitors still see character,
-     then eases further soft once the element enters view (via JS). */
-  font-variation-settings:
-    "SOFT" 30,
-    "opsz" 144,
-    "wght" 360;
+  font-weight: 300;
   line-height: 0.82;
   color: var(--ink);
   letter-spacing: -0.06em;
   display: inline-block;
-  transition: font-variation-settings 1400ms cubic-bezier(0.2, 0.7, 0.1, 1);
+  opacity: 0.5;
+  transition:
+    font-weight 1200ms cubic-bezier(0.2, 0.7, 0.1, 1),
+    opacity 1200ms cubic-bezier(0.2, 0.7, 0.1, 1);
 }
 
 .rung-1x .numeral {
@@ -489,28 +425,19 @@ section + section {
   color: var(--ink);
 }
 .rung-100x .numeral {
-  /* crescendo: oxblood + a more pronounced softening + heavier weight
-     combine to make the top rung read as a structural climax, without
-     a size bump that would overflow the grid column. */
-  color: var(--oxblood);
-  font-variation-settings:
-    "SOFT" 70,
-    "opsz" 144,
-    "wght" 400;
+  color: var(--accent);
+  font-weight: 300;
+  opacity: 0.6;
 }
 
 .numeral.is-soft {
-  font-variation-settings:
-    "SOFT" 100,
-    "opsz" 144,
-    "wght" 420;
+  font-weight: 400;
+  opacity: 1;
 }
 
 .rung-100x .numeral.is-soft {
-  font-variation-settings:
-    "SOFT" 100,
-    "opsz" 144,
-    "wght" 460;
+  font-weight: 600;
+  opacity: 1;
 }
 
 .rung-body {
@@ -523,25 +450,23 @@ section + section {
   font-size: 0.76rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--oxblood);
+  color: var(--accent);
   margin: 0 0 1rem;
 }
 
 .rung-heading {
   font-family: var(--display);
-  font-weight: 380;
-  font-variation-settings:
-    "SOFT" 50,
-    "opsz" 96;
+  font-weight: 400;
   font-size: clamp(1.55rem, 2.5vw, 2.1rem);
   line-height: 1.08;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   margin: 0 0 1rem;
   max-width: 22ch;
 }
 
 .rung-text {
   font-size: var(--fs-lead);
+  font-weight: 300;
   line-height: 1.58;
   color: var(--ink-dim);
   margin: 0 0 1.5rem;
@@ -571,23 +496,21 @@ section + section {
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--oxblood);
+  color: var(--accent);
   margin: 0 0 0.9rem;
 }
 
 .step-heading {
   font-family: var(--display);
   font-weight: 400;
-  font-variation-settings:
-    "SOFT" 40,
-    "opsz" 96;
   font-size: 1.55rem;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
   margin: 0 0 0.75rem;
 }
 
 .step-text {
   font-size: 0.98rem;
+  font-weight: 300;
   line-height: 1.55;
   color: var(--ink-dim);
   margin: 0;
@@ -611,22 +534,16 @@ section + section {
 .deliverable-label {
   grid-row: 1 / span 2;
   font-family: var(--display);
-  font-variation-settings:
-    "SOFT" 10,
-    "opsz" 48;
-  font-weight: 440;
+  font-weight: 400;
   font-size: 2.3rem;
   line-height: 0.9;
-  color: var(--oxblood);
+  color: var(--accent);
   margin: 0;
 }
 
 .deliverable-heading {
   font-family: var(--display);
-  font-weight: 420;
-  font-variation-settings:
-    "SOFT" 40,
-    "opsz" 96;
+  font-weight: 400;
   font-size: 1.35rem;
   line-height: 1.12;
   letter-spacing: -0.012em;
@@ -635,6 +552,7 @@ section + section {
 
 .deliverable-text {
   font-size: 0.98rem;
+  font-weight: 300;
   line-height: 1.55;
   color: var(--ink-dim);
   margin: 0;
@@ -657,7 +575,6 @@ section + section {
 
 .dashboard-card {
   background: var(--paper-soft);
-  border-radius: 8px;
   padding: 1.5rem;
   border: 1px solid var(--rule-soft);
   text-align: center;
@@ -741,6 +658,7 @@ section + section {
 
 .dashboard-bullets li {
   font-size: 0.8125rem;
+  font-weight: 300;
   padding: 0.3rem 0;
   color: var(--ink-faint);
   transition: color 0.3s ease;
@@ -776,7 +694,6 @@ section + section {
 
 .dashboard-output-box {
   background: var(--paper-soft);
-  border-radius: 8px;
   padding: 2rem;
   border: 1px solid var(--rule-soft);
   text-align: center;
@@ -801,6 +718,7 @@ section + section {
 
 .dashboard-narrative {
   font-size: 0.9375rem;
+  font-weight: 300;
   color: var(--ink-dim);
   max-width: 50ch;
   margin: 0.75rem auto 0;
@@ -819,9 +737,6 @@ section + section {
 
 .oversight-inner {
   display: grid;
-  /* pullquote gets the wider left column; body gets the right.
-     eyebrow spans full width so it doesn't consume a grid cell
-     and accidentally displace the pullquote into the narrow column. */
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
@@ -838,28 +753,23 @@ section + section {
 
 .pullquote p {
   font-family: var(--display);
-  font-weight: 340;
-  font-variation-settings:
-    "SOFT" 70,
-    "opsz" 144;
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  line-height: 1.02;
-  letter-spacing: -0.028em;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 3.8vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   color: var(--ink);
   margin: var(--space-2) 0 0;
-  max-width: 14ch;
+  max-width: 22ch;
 }
 
 .pullquote em {
   font-style: italic;
-  font-variation-settings:
-    "SOFT" 100,
-    "opsz" 144;
-  color: var(--oxblood);
+  color: var(--accent);
 }
 
 .oversight-body {
   font-size: var(--fs-lead);
+  font-weight: 300;
   line-height: 1.62;
   color: var(--ink-dim);
   max-width: 40ch;
@@ -882,10 +792,7 @@ section + section {
 
 .patterns-text {
   font-family: var(--display);
-  font-weight: 360;
-  font-variation-settings:
-    "SOFT" 50,
-    "opsz" 96;
+  font-weight: 400;
   font-size: clamp(1.25rem, 2vw, 1.7rem);
   line-height: 1.38;
   letter-spacing: -0.01em;
@@ -920,7 +827,7 @@ section + section {
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--oxblood);
+  color: var(--accent);
   margin: 0 0 1.25rem;
 }
 
@@ -935,10 +842,7 @@ section + section {
 
 .fit-col li {
   font-family: var(--display);
-  font-weight: 360;
-  font-variation-settings:
-    "SOFT" 40,
-    "opsz" 48;
+  font-weight: 400;
   font-size: 1.2rem;
   line-height: 1.32;
   letter-spacing: -0.01em;
@@ -954,7 +858,7 @@ section + section {
   top: 0.72em;
   width: 0.55rem;
   height: 1px;
-  background: var(--oxblood);
+  background: var(--accent);
 }
 
 .fit-not li {
@@ -985,10 +889,7 @@ section + section {
 
 .faq-item dt {
   font-family: var(--display);
-  font-weight: 380;
-  font-variation-settings:
-    "SOFT" 40,
-    "opsz" 96;
+  font-weight: 400;
   font-size: clamp(1.2rem, 2vw, 1.6rem);
   line-height: 1.14;
   letter-spacing: -0.012em;
@@ -998,6 +899,7 @@ section + section {
 .faq-item dd {
   margin: 0;
   font-size: var(--fs-lead);
+  font-weight: 300;
   line-height: 1.58;
   color: var(--ink-dim);
   max-width: 42ch;
@@ -1011,13 +913,10 @@ section + section {
 
 .closing-heading {
   font-family: var(--display);
-  font-weight: 360;
-  font-variation-settings:
-    "SOFT" 60,
-    "opsz" 144;
+  font-weight: 400;
   font-size: clamp(2rem, 4.8vw, 4rem);
-  line-height: 1.02;
-  letter-spacing: -0.025em;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   margin: 0 auto;
   max-width: 22ch;
 }
@@ -1031,7 +930,7 @@ section + section {
 }
 
 .ecosystem a {
-  color: var(--oxblood);
+  color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
@@ -1043,8 +942,6 @@ section + section {
   border-top: 1px solid var(--rule);
 }
 
-/* .footer-inner also receives max-width / page gutter from the shared
-   page-frame rule near the top of this file. */
 .footer-inner {
   display: flex;
   justify-content: space-between;
@@ -1073,10 +970,8 @@ section + section {
     transform: none;
   }
   .numeral {
-    font-variation-settings:
-      "SOFT" 80,
-      "opsz" 144,
-      "wght" 400;
+    font-weight: 400;
+    opacity: 1;
   }
 }
 
@@ -1116,6 +1011,14 @@ section + section {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.75rem;
   }
+
+  /* Remove asymmetric offset on smaller screens */
+  .hero-grid,
+  .ladder > article,
+  .oversight-inner,
+  .patterns-grid {
+    padding-left: var(--page-gutter);
+  }
 }
 
 @media (max-width: 640px) {
@@ -1149,6 +1052,6 @@ section + section {
 
   .btn {
     padding: 0.9rem 1.1rem;
-    font-size: 0.74rem;
+    font-size: 0.72rem;
   }
 }

@@ -8,28 +8,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,200..900,0..100&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --paper: #f3ebdd;
-        --paper-soft: #ece2d0;
-        --ink: #15130e;
-        --ink-dim: #4a4238;
-        --ink-faint: #8a7c6a;
-        --oxblood: #a83919;
-        --oxblood-deep: #7a2710;
-        --rule: rgba(21, 19, 14, 0.22);
-        --rule-soft: rgba(21, 19, 14, 0.1);
-        --display: "Fraunces", "Times New Roman", Georgia, serif;
-        --body: "Instrument Sans", -apple-system, system-ui, sans-serif;
+        --paper: #f7f5f0;
+        --paper-soft: #efece6;
+        --ink: #2c2c2c;
+        --ink-dim: #5a5a5a;
+        --ink-faint: #8a8a8a;
+        --accent: #3d4f7c;
+        --accent-deep: #2a3557;
+        --rule: rgba(0, 0, 0, 0.06);
+        --rule-soft: rgba(0, 0, 0, 0.03);
+        --display: "Source Serif 4", Georgia, serif;
+        --body: "DM Sans", -apple-system, system-ui, sans-serif;
         --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
         --page-gutter: clamp(1.25rem, 4vw, 3.5rem);
-        --page-max: 72rem;
-        --color-1x: #b8860b;
-        --color-10x: #a83919;
-        --color-100x: #5b2333;
+        --page-max: 60rem;
+        --color-1x: #8a7e6d;
+        --color-10x: #5a6b7c;
+        --color-100x: #3d4f7c;
       }
 
       *,
@@ -49,19 +49,9 @@
       body {
         font-family: var(--body);
         font-size: 1.0625rem;
+        font-weight: 300;
         line-height: 1.55;
-        background:
-          radial-gradient(
-            1200px 800px at 85% -10%,
-            rgba(168, 57, 25, 0.05),
-            transparent 60%
-          ),
-          radial-gradient(
-            1400px 900px at -10% 20%,
-            rgba(21, 19, 14, 0.045),
-            transparent 55%
-          ),
-          var(--paper);
+        background: var(--paper);
         min-height: 100vh;
         overflow-x: hidden;
       }
@@ -88,7 +78,7 @@
         margin-bottom: 1.5rem;
       }
       .back:hover {
-        color: var(--oxblood);
+        color: var(--accent);
       }
       .lab-header h1 {
         font-family: var(--display);
@@ -1341,8 +1331,8 @@
       function rcolor(v) {
         if (v >= 80) return "var(--ink)";
         if (v >= 40) return "var(--color-1x)";
-        if (v >= 10) return "var(--oxblood)";
-        return "var(--oxblood-deep)";
+        if (v >= 10) return "var(--accent)";
+        return "var(--accent-deep)";
       }
 
       // ── Layer-specific content ─────────────────────────────────
