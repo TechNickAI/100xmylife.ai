@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lab · Areas of Life · 100xmylife.ai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <style>
+      /* ---- Lab-only styles (scoped to /lab/life/) ---- */
+      .lab-nav {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        padding: 1rem var(--page-gutter);
+        background: rgba(12, 12, 12, 0.88);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--rule);
+        display: flex;
+        gap: 1.5rem;
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .lab-nav a {
+        color: var(--ink-dim);
+        text-decoration: none;
+      }
+      .lab-nav a:hover { color: var(--accent); }
+      .lab-intro {
+        padding: var(--space-5) var(--page-gutter) var(--space-3);
+        max-width: var(--page-max);
+        margin: 0 auto;
+      }
+      .lab-label {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.6rem;
+      }
+      .variant-wrap {
+        padding: var(--space-5) var(--page-gutter);
+        border-top: 1px solid var(--rule);
+      }
+      .variant-head {
+        max-width: var(--page-max);
+        margin: 0 auto var(--space-4);
+      }
+      .variant-num {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+      }
+      .variant-title {
+        font-family: var(--display);
+        font-size: clamp(1.6rem, 3vw, 2.3rem);
+        font-weight: 500;
+        color: var(--ink);
+        margin: 0.4rem 0 0.6rem;
+        line-height: 1.15;
+      }
+      .variant-note {
+        color: var(--ink-dim);
+        font-size: 1rem;
+        max-width: 42rem;
+      }
+
+      /* ---- V1: Card grid ---- */
+      .life-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        gap: 1.25rem;
+        max-width: var(--page-max);
+        margin: 0 auto;
+      }
+      .life-card {
+        border: 1px solid var(--rule);
+        padding: 1.75rem 1.5rem;
+        background: var(--paper-soft);
+        transition: border-color 180ms ease;
+      }
+      .life-card:hover { border-color: rgba(197, 165, 90, 0.25); }
+      .life-domain {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.75rem;
+      }
+      .life-before,
+      .life-after {
+        font-size: 0.96rem;
+        line-height: 1.55;
+      }
+      .life-before {
+        color: var(--ink-faint);
+        margin-bottom: 0.9rem;
+        padding-bottom: 0.9rem;
+        border-bottom: 1px dashed var(--rule);
+      }
+      .life-after { color: var(--ink); }
+      .life-example {
+        margin-top: 1rem;
+        font-style: italic;
+        font-size: 0.9rem;
+        color: var(--ink-dim);
+      }
+
+      /* ---- V2: Split panels ---- */
+      .split {
+        max-width: 78rem;
+        margin: 0 auto;
+      }
+      .split-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        border-top: 1px solid var(--rule);
+      }
+      .split-row:last-child { border-bottom: 1px solid var(--rule); }
+      .split-col {
+        padding: 2.75rem 2rem;
+      }
+      .split-before {
+        background: #0a0a0a;
+        color: var(--ink-faint);
+        border-right: 1px solid var(--rule);
+      }
+      .split-after {
+        background: linear-gradient(180deg, #111 0%, #0c0c0c 100%);
+        color: var(--ink);
+      }
+      .split-domain {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        margin-bottom: 1rem;
+      }
+      .split-after .split-domain { color: var(--accent); }
+      .split-state {
+        font-family: var(--display);
+        font-size: 1.35rem;
+        font-weight: 500;
+        line-height: 1.3;
+        margin: 0 0 0.9rem;
+        font-style: italic;
+      }
+      .split-after .split-state { font-style: normal; color: var(--ink); }
+      .split-desc {
+        font-size: 0.98rem;
+        line-height: 1.6;
+      }
+      .split-example {
+        margin-top: 1.1rem;
+        font-size: 0.88rem;
+        color: var(--accent-deep);
+        font-family: var(--mono);
+        letter-spacing: 0.02em;
+      }
+      @media (max-width: 720px) {
+        .split-row { grid-template-columns: 1fr; }
+        .split-before { border-right: none; border-bottom: 1px solid var(--rule); }
+      }
+
+      /* ---- V3: Day narrative ---- */
+      .day {
+        max-width: 52rem;
+        margin: 0 auto;
+        position: relative;
+      }
+      .day::before {
+        content: "";
+        position: absolute;
+        left: 6rem;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: var(--rule);
+      }
+      .day-beat {
+        display: grid;
+        grid-template-columns: 5rem 1fr;
+        gap: 2rem;
+        padding: 1.25rem 0;
+        position: relative;
+      }
+      .day-time {
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        color: var(--accent);
+        letter-spacing: 0.06em;
+        padding-top: 0.2rem;
+      }
+      .day-body {
+        border-left: 1px solid transparent;
+        padding-left: 1.75rem;
+        position: relative;
+      }
+      .day-body::before {
+        content: "";
+        position: absolute;
+        left: -4px;
+        top: 0.55rem;
+        width: 7px;
+        height: 7px;
+        background: var(--accent);
+        border-radius: 50%;
+      }
+      .day-headline {
+        color: var(--ink);
+        font-size: 1rem;
+        margin: 0 0 0.4rem;
+        font-weight: 400;
+      }
+      .day-note {
+        color: var(--ink-dim);
+        font-size: 0.92rem;
+        line-height: 1.55;
+      }
+      .day-area {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--ink-faint);
+        margin-bottom: 0.3rem;
+      }
+      @media (max-width: 640px) {
+        .day::before { left: 3.5rem; }
+        .day-beat { grid-template-columns: 3rem 1fr; gap: 1rem; }
+        .day-body { padding-left: 1.25rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="lab-nav">
+      <a href="#v1">V1 · Cards</a>
+      <a href="#v2">V2 · Before / After</a>
+      <a href="#v3">V3 · A day held together</a>
+      <a href="/" style="margin-left: auto;">← home</a>
+    </nav>
+
+    <section class="lab-intro">
+      <p class="lab-label">Design lab · areas of life</p>
+      <h1 style="font-family: var(--display); font-weight: 500; font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 1rem; line-height: 1.15;">
+        What parts of your life does this actually help with?
+      </h1>
+      <p style="color: var(--ink-dim); font-size: 1.1rem; max-width: 42rem;">
+        Three treatments of the same story. Not a feature list. A map of the surfaces
+        where a quiet operating layer makes a life feel lighter.
+      </p>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- V1: Card grid                                                  -->
+    <!-- ============================================================ -->
+    <section id="v1" class="variant-wrap">
+      <div class="variant-head">
+        <div class="variant-num">Variant 01</div>
+        <h2 class="variant-title">Cards by life area</h2>
+        <p class="variant-note">
+          Eight surfaces. Each one carries a quiet before and a specific after.
+          Scannable in under a minute. Good for the top of a product page.
+        </p>
+      </div>
+
+      <div class="life-grid">
+        <article class="life-card">
+          <div class="life-domain">Health</div>
+          <p class="life-before">Labs land in an inbox. Supplements get rotated on memory. Nothing is tied together.</p>
+          <p class="life-after">Labs, supplements, recovery, and sleep all live in one place. Your AI remembers the APOE context, catches the uric acid drift, and reminds you to pull the next panel before the old one goes stale.</p>
+          <p class="life-example">Flagged a gout risk pattern two weeks before the flare pattern you always get.</p>
+        </article>
+
+        <article class="life-card">
+          <div class="life-domain">Travel</div>
+          <p class="life-before">Itinerary in email, hotel in a confirmation, reservations on paper, weather checked the morning of.</p>
+          <p class="life-after">One brief per trip. Flights, terminal, hotel, dinner, weather, and the small details bundled the night before so you move without checking four apps at the curb.</p>
+          <p class="life-example">Delivered the Summit at Sea travel brief with boarding cutoff and the Opening Plenary slot already on the calendar.</p>
+        </article>
+
+        <article class="life-card">
+          <div class="life-domain">Scheduling</div>
+          <p class="life-before">Meetings stack. Travel collides with dinners. Recurring nudges get lost in noise.</p>
+          <p class="life-after">The calendar is held, not managed. Conflicts surface before they matter. Reminders arrive in your voice, not a corporate tone, and never the same line twice.</p>
+          <p class="life-example">Nudged you about the Tonal lift in a different voice every morning for a week.</p>
+        </article>
+
+        <article class="life-card">
+          <div class="life-domain">Inbox &amp; comms</div>
+          <p class="life-before">Forty unread. The three that matter sit under thirty that do not. Replies drift for days.</p>
+          <p class="life-after">Triage happens quietly overnight. Drafts get prepared in your voice. Sensitive language stops for your read. The inbox becomes a decision surface, not a cost.</p>
+          <p class="life-example">Caught the David Thornley thread four times in a row because no one had replied.</p>
+        </article>
+
+        <article class="life-card">
+          <div class="life-domain">Relationships</div>
+          <p class="life-before">Birthdays miss. Follow-ups slip. The warm thread with someone you care about quietly goes cold.</p>
+          <p class="life-after">Context stays warm across months. The small gestures that prove attention keep happening. Your AI remembers what matters to the person, not just the date.</p>
+          <p class="life-example">Prepped the three people worth meeting tonight with the angle most likely to open real conversation.</p>
+        </article>
+
+        <article class="life-card">
+          <div class="life-domain">Logistics</div>
+          <p class="life-before">Reservations made and forgotten. Rides booked in panic. Refunds never claimed.</p>
+          <p class="life-after">Bookings get made, confirmed, and held against changes. Cancellations trigger refunds. The whole tail of small logistics runs in the background.</p>
+          <p class="life-example">Worked the phone with a venue that only takes voice bookings and handed back three real options.</p>
+        </article>
+
+        <article class="life-card">
+          <div class="life-domain">Research</div>
+          <p class="life-before">You open a browser, fall in, lose an hour, surface with nothing written down.</p>
+          <p class="life-after">A question becomes a one-page brief. Options surfaced, sources cited, the trade-offs framed so the decision is the only thing left for you to make.</p>
+          <p class="life-example">Mapped twenty-six attendees for one dinner with the shared threads between them.</p>
+        </article>
+
+        <article class="life-card">
+          <div class="life-domain">Home &amp; ambient</div>
+          <p class="life-before">Lights hard-coded. Sleep temperature set on instinct. The small systems drift out of rhythm.</p>
+          <p class="life-after">Circadian lighting follows the season. The bed preheats on weather. The house runs on your rhythms, not a grid of static schedules.</p>
+          <p class="life-example">Dropped the bed temperature four degrees for the night the forecast pushed past eighty.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- V2: Before / After split panels                                -->
+    <!-- ============================================================ -->
+    <section id="v2" class="variant-wrap">
+      <div class="variant-head">
+        <div class="variant-num">Variant 02</div>
+        <h2 class="variant-title">Before, and after.</h2>
+        <p class="variant-note">
+          Eight life surfaces shown as a contrast. Left side: the friction most people live with.
+          Right side: what the same surface feels like once it is held. Editorial. Felt transformation.
+        </p>
+      </div>
+
+      <div class="split">
+
+        <div class="split-row">
+          <div class="split-col split-before">
+            <div class="split-domain">Health · before</div>
+            <p class="split-state">Labs land in an inbox.</p>
+            <p class="split-desc">Supplements rotate on memory. You track recovery on a ring, sleep on an app, and mood in your head. Nothing ties together. Patterns go missed until a flare arrives.</p>
+          </div>
+          <div class="split-col split-after">
+            <div class="split-domain">Health · after</div>
+            <p class="split-state">One view. Context held across months.</p>
+            <p class="split-desc">Labs, supplements, sleep, and recovery belong to one timeline. The drift that used to surprise you gets flagged early, in your voice, with the specific context that matters for your body.</p>
+            <p class="split-example">// caught the uric acid trend before the flare</p>
+          </div>
+        </div>
+
+        <div class="split-row">
+          <div class="split-col split-before">
+            <div class="split-domain">Travel · before</div>
+            <p class="split-state">Itinerary scattered across five places.</p>
+            <p class="split-desc">Flight in email, hotel in a PDF, dinner on a text, weather checked at the gate. You do the work of reassembling it every trip.</p>
+          </div>
+          <div class="split-col split-after">
+            <div class="split-domain">Travel · after</div>
+            <p class="split-state">One brief the night before.</p>
+            <p class="split-desc">Flights, terminal, timing, hotel, reservations, weather, and the small details bundled into a single thread you can scan between gates. The system already moved the dinner when the flight slipped.</p>
+            <p class="split-example">// Summit brief delivered at boarding</p>
+          </div>
+        </div>
+
+        <div class="split-row">
+          <div class="split-col split-before">
+            <div class="split-domain">Scheduling · before</div>
+            <p class="split-state">The calendar runs you.</p>
+            <p class="split-desc">Meetings stack. Travel collides with dinners. The recurring nudges you actually need blend into every other notification your phone throws at you.</p>
+          </div>
+          <div class="split-col split-after">
+            <div class="split-domain">Scheduling · after</div>
+            <p class="split-state">Held, not managed.</p>
+            <p class="split-desc">Conflicts surface before they matter. Reminders arrive in your voice, fresh every time, never the same line twice. The calendar becomes a thing you trust instead of police.</p>
+            <p class="split-example">// a different Tonal nudge every morning this week</p>
+          </div>
+        </div>
+
+        <div class="split-row">
+          <div class="split-col split-before">
+            <div class="split-domain">Inbox &amp; comms · before</div>
+            <p class="split-state">Forty unread. Three of them matter.</p>
+            <p class="split-desc">The three that matter sit under thirty that do not. Replies drift for days. The same subject reopens four times before anyone closes it.</p>
+          </div>
+          <div class="split-col split-after">
+            <div class="split-domain">Inbox &amp; comms · after</div>
+            <p class="split-state">Triage happens in the quiet hours.</p>
+            <p class="split-desc">Drafts wait in your voice. Low-risk replies go out. Anything sensitive or one-way stops at the trust boundary for your read. The inbox becomes a decision surface, not a cost.</p>
+            <p class="split-example">// flagged the David Thornley thread, again</p>
+          </div>
+        </div>
+
+        <div class="split-row">
+          <div class="split-col split-before">
+            <div class="split-domain">Relationships · before</div>
+            <p class="split-state">The warm thread quietly goes cold.</p>
+            <p class="split-desc">Birthdays miss. Follow-ups slip. You remember the name but not the context, and the person who deserved a real answer gets a late one.</p>
+          </div>
+          <div class="split-col split-after">
+            <div class="split-domain">Relationships · after</div>
+            <p class="split-state">Attention that compounds.</p>
+            <p class="split-desc">Context stays warm across months. What matters to the person carries forward. The small gestures that prove you were paying attention keep happening on time.</p>
+            <p class="split-example">// three people to meet tonight, with the angle for each</p>
+          </div>
+        </div>
+
+        <div class="split-row">
+          <div class="split-col split-before">
+            <div class="split-domain">Logistics · before</div>
+            <p class="split-state">The tail of small tasks never ends.</p>
+            <p class="split-desc">Reservations made, then forgotten. Rides booked in a rush. Refunds never claimed. The small errands pile up and steal the good hours.</p>
+          </div>
+          <div class="split-col split-after">
+            <div class="split-domain">Logistics · after</div>
+            <p class="split-state">Runs in the background.</p>
+            <p class="split-desc">Bookings confirmed and held against changes. Cancellations trigger refunds. Even the venues that only take a voice call get worked, because your AI can pick up the phone.</p>
+            <p class="split-example">// handed back three real dinner options by 6pm</p>
+          </div>
+        </div>
+
+        <div class="split-row">
+          <div class="split-col split-before">
+            <div class="split-domain">Research · before</div>
+            <p class="split-state">An hour in a browser, nothing on paper.</p>
+            <p class="split-desc">You open one tab, then twelve. You surface confused, with the decision still not made. Important questions get lost to the fatigue of finding out.</p>
+          </div>
+          <div class="split-col split-after">
+            <div class="split-domain">Research · after</div>
+            <p class="split-state">A question becomes a brief.</p>
+            <p class="split-desc">Options surfaced, sources cited, the trade-offs framed. The decision is the only thing left for you to make, and the material is already in the shape your judgment needs.</p>
+            <p class="split-example">// twenty-six attendees mapped for one dinner</p>
+          </div>
+        </div>
+
+        <div class="split-row">
+          <div class="split-col split-before">
+            <div class="split-domain">Home &amp; ambient · before</div>
+            <p class="split-state">The house runs on static rules.</p>
+            <p class="split-desc">Lights hard-coded to a time. Temperature set on instinct. The small systems drift out of rhythm with the season, the weather, and the body they are supposed to serve.</p>
+          </div>
+          <div class="split-col split-after">
+            <div class="split-domain">Home &amp; ambient · after</div>
+            <p class="split-state">Your rhythms, not a grid.</p>
+            <p class="split-desc">Circadian lighting follows the season. The bed preheats on weather. The ambient layer of your home learns the way you actually live and stays close to it.</p>
+            <p class="split-example">// dropped bed temp four degrees for the heat wave</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- V3: A day held together                                        -->
+    <!-- ============================================================ -->
+    <section id="v3" class="variant-wrap">
+      <div class="variant-head">
+        <div class="variant-num">Variant 03</div>
+        <h2 class="variant-title">A day held together.</h2>
+        <p class="variant-note">
+          One continuous timeline. No categories. The same eight surfaces show up the way
+          they actually appear in a life, through the texture of an ordinary Tuesday.
+        </p>
+      </div>
+
+      <div class="day">
+        <div class="day-beat">
+          <div class="day-time">06:42</div>
+          <div class="day-body">
+            <div class="day-area">Home &amp; ambient</div>
+            <h4 class="day-headline">Lights came up warm with the sunrise.</h4>
+            <p class="day-note">The bedroom eased into day on the season&rsquo;s curve. The bed stepped down two degrees an hour ago so the wake did not fight a heat wave.</p>
+          </div>
+        </div>
+
+        <div class="day-beat">
+          <div class="day-time">07:15</div>
+          <div class="day-body">
+            <div class="day-area">Health</div>
+            <h4 class="day-headline">The morning brief was already waiting.</h4>
+            <p class="day-note">Supplements for today, recovery score in context, the one lab value trending in the wrong direction. The nudge for tomorrow&rsquo;s lift arrived in a voice you had not heard this week.</p>
+          </div>
+        </div>
+
+        <div class="day-beat">
+          <div class="day-time">08:10</div>
+          <div class="day-body">
+            <div class="day-area">Research &amp; briefing</div>
+            <h4 class="day-headline">Three people worth meeting tonight.</h4>
+            <p class="day-note">Who they are, what they are building, the angle most likely to open a real conversation. One page. No more scanning LinkedIn at the door.</p>
+          </div>
+        </div>
+
+        <div class="day-beat">
+          <div class="day-time">09:30</div>
+          <div class="day-body">
+            <div class="day-area">Inbox &amp; comms</div>
+            <h4 class="day-headline">Triage done overnight. Two drafts holding for your read.</h4>
+            <p class="day-note">The forty unread became the three that needed you. Routine warmth already moved. Sensitive language stopped at the trust boundary.</p>
+          </div>
+        </div>
+
+        <div class="day-beat">
+          <div class="day-time">11:45</div>
+          <div class="day-body">
+            <div class="day-area">Scheduling</div>
+            <h4 class="day-headline">Caught the collision before it cost anyone.</h4>
+            <p class="day-note">A new meeting tried to land on top of the Friday dinner. The reschedule was proposed to both sides in your voice before you saw the conflict yourself.</p>
+          </div>
+        </div>
+
+        <div class="day-beat">
+          <div class="day-time">13:20</div>
+          <div class="day-body">
+            <div class="day-area">Logistics</div>
+            <h4 class="day-headline">Called the venue that only takes voice.</h4>
+            <p class="day-note">Three real dinner options came back with open tables, warm rooms, and a clean path to a seven thirty seat. You picked. It booked.</p>
+          </div>
+        </div>
+
+        <div class="day-beat">
+          <div class="day-time">15:00</div>
+          <div class="day-body">
+            <div class="day-area">Relationships</div>
+            <h4 class="day-headline">The warm thread with someone you care about stayed warm.</h4>
+            <p class="day-note">A small check in, timed to a moment in their life that you would have forgotten by Thursday. Written in your voice, sent in your name, and ready to be replied to like a friend wrote it.</p>
+          </div>
+        </div>
+
+        <div class="day-beat">
+          <div class="day-time">18:40</div>
+          <div class="day-body">
+            <div class="day-area">Travel</div>
+            <h4 class="day-headline">Tomorrow&rsquo;s trip bundled into one brief.</h4>
+            <p class="day-note">Terminal, timing, hotel, the dinner the night you land, and the small details that usually live scattered across five places. Everything together. Nothing to reassemble at the curb.</p>
+          </div>
+        </div>
+
+        <div class="day-beat">
+          <div class="day-time">22:30</div>
+          <div class="day-body">
+            <div class="day-area">Home &amp; ambient</div>
+            <h4 class="day-headline">The house eased into night behind you.</h4>
+            <p class="day-note">Lights dimmed on the body&rsquo;s curve, not on a static schedule. The bed pre-cooled for the hours you sleep deepest. The system quieted with you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer style="padding: var(--space-5) var(--page-gutter); border-top: 1px solid var(--rule); text-align: center; color: var(--ink-faint); font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em;">
+      <p>lab · temporary · for review</p>
+    </footer>
+  </body>
+</html>
